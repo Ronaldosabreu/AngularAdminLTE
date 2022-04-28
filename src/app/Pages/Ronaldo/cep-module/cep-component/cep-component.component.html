@@ -21,6 +21,10 @@
         </div>
     </div>
   </div>
-  <app-endereco-component  class="col-md-12" [EnderecoObj]="EnderecoObj" ></app-endereco-component>
+
+  <app-loading *ngIf="loading"></app-loading>
+  
+
+  <app-endereco-component  class="col-md-12" [EnderecoRecebido]="EnderecoObj" ></app-endereco-component>
 
 

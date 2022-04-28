@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { CepRoutes } from '../cep-route.routing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EnderecoComponentComponent } from './endereco-component/endereco-component.component';
+import { LoadingComponent } from '../../loading/loading.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { EnderecoComponentComponent } from './endereco-component/endereco-compon
   declarations: 
   [
     CepComponentComponent,
-    EnderecoComponentComponent
+    EnderecoComponentComponent,
+    LoadingComponent
   ]
 })
 export class CepModuleModule { }

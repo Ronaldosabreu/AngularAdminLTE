@@ -15,6 +15,7 @@ import { NavegacaoModule } from './Shared/navegacao.module';
 import ptBr from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { LoadingComponent } from './Pages/loading/loading.component';
 
 registerLocaleData(ptBr);
 // **************************************************

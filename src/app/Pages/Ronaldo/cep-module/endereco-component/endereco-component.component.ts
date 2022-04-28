@@ -9,7 +9,7 @@ import { Endereco } from '../../models/endereco';
 })
 export class EnderecoComponentComponent implements OnInit {
 
-  @Input() EnderecoObj: Endereco;
+  @Input() EnderecoRecebido: Endereco;
   EndViaCep: FormGroup;
 
   constructor( private fb: FormBuilder) { }
@@ -34,10 +34,10 @@ export class EnderecoComponentComponent implements OnInit {
   {
     if(uf === 'SP')
     {
-    this.EnderecoObj.localidade = 'SUZANO';
+    this.EnderecoRecebido.localidade = 'SUZANO';
     }
     else
-    {this.EnderecoObj.localidade = 'CAMPOS GERAIS';}
+    {this.EnderecoRecebido.localidade = 'CAMPOS GERAIS';}
   }
 
 }

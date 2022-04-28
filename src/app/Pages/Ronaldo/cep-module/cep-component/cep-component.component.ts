@@ -12,6 +12,8 @@ export class CepComponentComponent implements OnInit {
 
   cep = new FormControl('08615050',[Validators.required]);
   EnderecoObj: Endereco;
+  loading: boolean;
+
 
   constructor(private service: CepServiceService) { }
 
@@ -23,6 +25,12 @@ export class CepComponentComponent implements OnInit {
 
   buscarCep()
   {
+    this.loading = true;  
+
+    setTimeout(() => {
+      
+    
+    
     this.EnderecoObj = { cep:"", bairro:"",
                         complemento:"",
                         ddd:"",
@@ -40,10 +48,14 @@ export class CepComponentComponent implements OnInit {
          
           this.EnderecoObj = Endereco;
        },
-       complete: () => { 
-        
+       complete: () => 
+       { 
+        this.loading = false;
        },
-       error: (erro: Error) => { }
+       error: (erro: Error) => {
+        this.loading = false;
+        }
      });
+    }, 2000);
   }
 }
