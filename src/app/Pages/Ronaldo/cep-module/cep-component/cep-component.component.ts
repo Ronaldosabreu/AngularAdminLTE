@@ -48,4 +48,9 @@ export class CepComponentComponent implements OnInit {
         }
      });
   }
+
+  GravarEndereco(event: Endereco)
+  {
+    alert(event.localidade);
+  }
 }

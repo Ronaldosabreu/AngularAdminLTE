@@ -25,6 +25,6 @@
   <app-loading *ngIf="loading"></app-loading>
   
 
-  <app-endereco-component  class="col-md-12" [EnderecoRecebido]="EnderecoObj" ></app-endereco-component>
-
-
+  <app-endereco-component  class="col-md-12" 
+  [EnderecoRecebido]="EnderecoObj"  
+  (enviarPataOPaiEmit)="GravarEndereco($event)"></app-endereco-component>

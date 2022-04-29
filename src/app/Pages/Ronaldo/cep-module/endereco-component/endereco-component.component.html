@@ -1,5 +1,5 @@
 <form novalidate [formGroup]="EndViaCep">
-  <div  *ngIf="EnderecoRecebido != null">
+  <div  *ngIf="EnderecoObj != null">
     <div class="card card-danger">
       <div class="card-header">
         <h3 class="card-title">Endereço</h3>
@@ -9,10 +9,11 @@
         <div class="row">
             <div class="form-group col-md-6">
               <label>LOGRADOURO</label>
-              <input type="text" class="form-control" placeholder="Endereço"  formControlName="logradouro" [(ngModel)]="EnderecoRecebido.logradouro"
+              <input type="text" class="form-control" placeholder="Endereço"  formControlName="logradouro" [(ngModel)]="EnderecoObj.logradouro"
               
               [ngClass]="{'is-invalid': (EndViaCep.get('logradouro')?.errors && 
-                    (EndViaCep.get('logradouro')?.touched || EndViaCep.get('logradouro')?.dirty)) }">
+                    (EndViaCep.get('logradouro')?.touched || EndViaCep.get('logradouro')?.dirty)), 
+                    'is-valid': EndViaCep.get('logradouro')?.valid}">
 
               <span class="text-danger" *ngIf="(EndViaCep.get('logradouro')?.errors?.minlength
                           && (EndViaCep.get('logradouro')?.touched || EndViaCep.get('logradouro')?.dirty))">
@@ -27,7 +28,7 @@
             <div class="form-group col-md-6">
               <label>COMPLEMENTO</label>
               <input type="text" class="form-control" placeholder="Bairro" 
-                    [(ngModel)]=EnderecoRecebido.complemento formControlName="complemento">
+                    [(ngModel)]=EnderecoObj.complemento formControlName="complemento">
             </div>
           </div>
 
@@ -35,9 +36,11 @@
             <div class="form-group col-md-6">
             <label>Bairro</label>
             <input type="text" class="form-control" placeholder="Bairro" 
-              [(ngModel)]=EnderecoRecebido.bairro formControlName="bairro"
-              [ngClass]="{'is-invalid': (EndViaCep.get('bairro')?.errors && 
-              (EndViaCep.get('bairro')?.touched || EndViaCep.get('bairro')?.dirty)) }"
+              [(ngModel)]=EnderecoObj.bairro formControlName="bairro"
+              [ngClass]="{
+                          'is-invalid': EndViaCep.get('bairro')?.errors &&  (EndViaCep.get('bairro')?.touched || EndViaCep.get('bairro')?.dirty),
+                          'is-valid': EndViaCep.get('bairro')?.valid
+                        }"
               >
 
             <span class="text-danger" *ngIf="(EndViaCep.get('bairro')?.errors?.minlength
@@ -52,73 +55,72 @@
           </div>
           <div class="form-group  col-md-6">
             <label>Cidade</label>
-            <!-- <input type="text" class="form-control" placeholder="Cidade" [(ngModel)]=EnderecoRecebido.localidade  formControlName="localidade"> -->
-
-            <select class="form-control " placeholder="Cidade"  
-                                          [(ngModel)]=EnderecoRecebido.localidade  
+            <select class="form-control " placeholder="Cidade"  [(ngModel)]=EnderecoObj.localidade  
                                           formControlName="localidade"
-                                          [ngClass]="{'is-invalid': EnderecoRecebido.localidade === 'Selecione'}"
+                                          [ngClass]="{'is-invalid': EnderecoObj.localidade === '',
+                                          'is-valid': EndViaCep.get('localidade')?.valid
+                                        }"
                                            >
-                        <option value="Selecione">SELECIONE A CIDADE</option>
+                        <option value="">SELECIONE A CIDADE</option>
                         <option value="SUZANO">SUZANO</option>
                         <option value="CAMPOS GERAIS">CAMPOS GERAIS</option>
             </select>
-            <span class="text-danger" *ngIf="EnderecoRecebido.localidade === 'Selecione' ">
-                    <p >Selecione uma cidade</p>
-            </span>
+            <span class="text-danger" *ngIf="EnderecoObj.localidade === '' ">
+                    <p >Selecione uma cidade</p></span>
            </div>
         </div>
+        
         <div class="row">
           <div class="form-group col-md-2">
             <label>UF</label>
-            <!-- <input type="text" class="form-control" placeholder="Cidade" [(ngModel)]=EnderecoRecebido.uf  formControlName="uf"> -->
-            <select class="form-control " placeholder="Cidade"  
-                  [(ngModel)]=EnderecoRecebido.uf  
-                  formControlName="uf" 
-                  (ngModelChange)="mudarCidade($event)" 
-                  [ngClass]="{'is-invalid': EnderecoRecebido.uf === 'Selecione'}"
+            <select class="form-control " placeholder="UF"   [(ngModel)]=EnderecoObj.uf  
+                  formControlName="uf"  (ngModelChange)="mudarCidade($event)" 
+                  [ngClass]="{'is-invalid': EnderecoObj.uf === '',
+                  'is-valid': EndViaCep.get('uf')?.valid
+                }"
                   >
-              <option value="Selecione">SELECIONE O ESTADO</option>
-              <option value="RO">RO</option>
-              <option value="AC">AC</option>
+              <option value="">SELECIONE O ESTADO</option>
               <option value="SP">SP</option>
               <option value="MG">MG</option>
-              <option value="AM">AM</option>
             </select>
-            <span class="text-danger" *ngIf="EnderecoRecebido.uf === 'Selecione' ">
+            <span class="text-danger" *ngIf="EnderecoObj.uf === '' ">
                 <p >Selecione um Estado</p>
             </span>
           </div>
+
+
           <div class="form-group col-md-3">
             <label>IBGE</label>
-            <input type="text" class="form-control" placeholder="Cidade" [(ngModel)]=EnderecoRecebido.ibge  formControlName="ibge">
+            <input type="text" class="form-control" placeholder="ibge" [(ngModel)]=EnderecoObj.ibge  formControlName="ibge">
           </div>
           <div class="form-group col-md-3">
             <label>GIA</label>
-            <input type="text" class="form-control" placeholder="Cidade" [(ngModel)]=EnderecoRecebido.gia  formControlName="gia">
+            <input type="text" class="form-control" placeholder="gia" [(ngModel)]=EnderecoObj.gia  formControlName="gia">
           </div>
 
           <div class="form-group  col-md-3">
             <label>DDD</label>
-            <input type="number" class="form-control" placeholder="Cidade" [(ngModel)]=EnderecoRecebido.ddd  formControlName="ddd"
+            <input type="number" class="form-control" placeholder="ddd" [(ngModel)]=EnderecoObj.ddd  formControlName="ddd"
             max="99"
             min="10"
             [ngClass]="{'is-invalid': (EndViaCep.get('ddd')?.errors && 
-            (EndViaCep.get('ddd')?.touched || EndViaCep.get('ddd')?.dirty))}"
+            (EndViaCep.get('ddd')?.touched || EndViaCep.get('ddd')?.dirty)),
+            'is-valid': EndViaCep.get('ddd')?.valid
+          }"
             >
           </div>
 
           <div class="form-group col-md-2">
             <label>SIAFI</label>
-            <input type="text" class="form-control" placeholder="Cidade" [(ngModel)]=EnderecoRecebido.siafi  formControlName="siafi">
+            <input type="text" class="form-control" placeholder="siafi" [(ngModel)]=EnderecoObj.siafi  formControlName="siafi">
           </div>
 
-          <div class="form-group col-md-2">
-            <button class="btn btn-success">CADASTRAR</button>
-          </div>
+        
         </div>
 
-       
+        <div class="form-group " >
+          <button class="btn btn-success" [disabled]="!EndViaCep.valid" (click)="EnviarParaOPaiCadEndereco()">CADASTRAR</button>
+        </div>
       </div>
     </div>
   </div>

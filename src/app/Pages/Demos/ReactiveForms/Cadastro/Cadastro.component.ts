@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChildren } from '@angular/core';
-import { FormBuilder, FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
 import { Usuario } from './models/usuario';
 import { NgBrazilValidators } from 'ng-brazil';
 import { MascaraUtil } from 'src/app/Utils/mask';
@@ -72,7 +72,7 @@ export class CadastroComponent implements OnInit, AfterViewInit {
 
         let senha  =  new FormControl('',[Validators.required, CustomValidators.rangeLength([6,15])])
         let confirmPassword  =  new FormControl('',
-                                        [
+                                         [
                                             Validators.required, 
                                             CustomValidators.rangeLength([6,15]), 
                                             CustomValidators.equalTo(senha) 
