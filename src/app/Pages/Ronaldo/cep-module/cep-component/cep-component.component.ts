@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Endereco } from '../../models/endereco';
 import { CepServiceService } from '../cep-service.service';
@@ -15,12 +15,16 @@ export class CepComponentComponent implements OnInit {
   loading: boolean;
 
 
-  constructor(private service: CepServiceService) { }
+  constructor(private service: CepServiceService, private cdref: ChangeDetectorRef) { }
 
   ngOnInit() 
   {
 
 
+  }
+
+  ngAfterContentChecked() {
+    this.cdref.detectChanges();
   }
 
   buscarCep()
