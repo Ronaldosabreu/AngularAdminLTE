@@ -10,25 +10,45 @@
             <div class="form-group col-md-6">
               <label>LOGRADOURO</label>
               <input type="text" class="form-control" placeholder="Endereço"  formControlName="logradouro" [(ngModel)]="EnderecoRecebido.logradouro"
+              
               [ngClass]="{'is-invalid': (EndViaCep.get('logradouro')?.errors && 
                     (EndViaCep.get('logradouro')?.touched || EndViaCep.get('logradouro')?.dirty)) }">
 
               <span class="text-danger" *ngIf="(EndViaCep.get('logradouro')?.errors?.minlength
                           && (EndViaCep.get('logradouro')?.touched || EndViaCep.get('logradouro')?.dirty))">
-              <p >Preencha o campo Logradouro</p>
+                        <p >Minimo de caracteres é 2 maximo 150</p>
+            </span>
+              <span class="text-danger" *ngIf="(EndViaCep.get('logradouro')?.errors?.required
+                          && (EndViaCep.get('logradouro')?.touched || EndViaCep.get('logradouro')?.dirty))">
+              <p >Por favor preencha o campo</p>
               </span>
             </div>
 
             <div class="form-group col-md-6">
               <label>COMPLEMENTO</label>
-              <input type="text" class="form-control" placeholder="Bairro" [(ngModel)]=EnderecoRecebido.complemento formControlName="complemento">
+              <input type="text" class="form-control" placeholder="Bairro" 
+                    [(ngModel)]=EnderecoRecebido.complemento formControlName="complemento">
             </div>
           </div>
 
           <div class="row">
             <div class="form-group col-md-6">
             <label>Bairro</label>
-            <input type="text" class="form-control" placeholder="Bairro" [(ngModel)]=EnderecoRecebido.bairro formControlName="bairro">
+            <input type="text" class="form-control" placeholder="Bairro" 
+              [(ngModel)]=EnderecoRecebido.bairro formControlName="bairro"
+              [ngClass]="{'is-invalid': (EndViaCep.get('bairro')?.errors && 
+              (EndViaCep.get('bairro')?.touched || EndViaCep.get('bairro')?.dirty)) }"
+              >
+
+            <span class="text-danger" *ngIf="(EndViaCep.get('bairro')?.errors?.minlength
+                      && (EndViaCep.get('bairro')?.touched || EndViaCep.get('bairro')?.dirty))">
+                    <p >Minimo de caracteres é 2 maximo 150</p>
+            </span>
+            <span class="text-danger" *ngIf="(EndViaCep.get('bairro')?.errors?.required
+                          && (EndViaCep.get('bairro')?.touched || EndViaCep.get('bairro')?.dirty))">
+                      <p >Por favor preencha o campo</p>
+            </span>
+
           </div>
           <div class="form-group  col-md-6">
             <label>Cidade</label>
@@ -36,26 +56,38 @@
 
             <select class="form-control " placeholder="Cidade"  
                                           [(ngModel)]=EnderecoRecebido.localidade  
-                                          formControlName="localidade" >
+                                          formControlName="localidade"
+                                          [ngClass]="{'is-invalid': EnderecoRecebido.localidade === 'Selecione'}"
+                                           >
+                        <option value="Selecione">SELECIONE A CIDADE</option>
                         <option value="SUZANO">SUZANO</option>
                         <option value="CAMPOS GERAIS">CAMPOS GERAIS</option>
             </select>
+            <span class="text-danger" *ngIf="EnderecoRecebido.localidade === 'Selecione' ">
+                    <p >Selecione uma cidade</p>
+            </span>
            </div>
         </div>
         <div class="row">
-          <div class="form-group col-md-1">
+          <div class="form-group col-md-2">
             <label>UF</label>
             <!-- <input type="text" class="form-control" placeholder="Cidade" [(ngModel)]=EnderecoRecebido.uf  formControlName="uf"> -->
             <select class="form-control " placeholder="Cidade"  
                   [(ngModel)]=EnderecoRecebido.uf  
                   formControlName="uf" 
-                  (ngModelChange)="mudarCidade($event)" >
+                  (ngModelChange)="mudarCidade($event)" 
+                  [ngClass]="{'is-invalid': EnderecoRecebido.uf === 'Selecione'}"
+                  >
+              <option value="Selecione">SELECIONE O ESTADO</option>
               <option value="RO">RO</option>
               <option value="AC">AC</option>
               <option value="SP">SP</option>
-              <option value="MP">MP</option>
+              <option value="MG">MG</option>
               <option value="AM">AM</option>
             </select>
+            <span class="text-danger" *ngIf="EnderecoRecebido.uf === 'Selecione' ">
+                <p >Selecione um Estado</p>
+            </span>
           </div>
           <div class="form-group col-md-3">
             <label>IBGE</label>
@@ -68,7 +100,12 @@
 
           <div class="form-group  col-md-3">
             <label>DDD</label>
-            <input type="text" class="form-control" placeholder="Cidade" [(ngModel)]=EnderecoRecebido.ddd  formControlName="ddd">
+            <input type="number" class="form-control" placeholder="Cidade" [(ngModel)]=EnderecoRecebido.ddd  formControlName="ddd"
+            max="99"
+            min="10"
+            [ngClass]="{'is-invalid': (EndViaCep.get('ddd')?.errors && 
+            (EndViaCep.get('ddd')?.touched || EndViaCep.get('ddd')?.dirty))}"
+            >
           </div>
 
           <div class="form-group col-md-2">

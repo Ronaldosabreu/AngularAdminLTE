@@ -19,25 +19,22 @@ export class EnderecoComponentComponent implements OnInit {
     this.EndViaCep =  this.fb.group(
       {
          logradouro: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(150)]],
-         complemento:['', [Validators.required, Validators.minLength(2), Validators.maxLength(150)]],
+         complemento:[''],
          bairro:['', [Validators.required, Validators.minLength(2), Validators.maxLength(150)]],
          localidade: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(150)]],
-         uf: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(150)]],
-         ibge: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(150)]],
-         gia: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(150)]],
-         ddd: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(150)]],
-         siafi: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(150)]],
+         uf: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(2)]],
+         ibge: [''],
+         gia: [''],
+         ddd: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(2)]],
+         siafi: [''],
       });
   }
 
   mudarCidade(uf: string)
   {
-    if(uf === 'SP')
-    {
-    this.EnderecoRecebido.localidade = 'SUZANO';
-    }
-    else
-    {this.EnderecoRecebido.localidade = 'CAMPOS GERAIS';}
+    if(uf === 'SP')this.EnderecoRecebido.localidade = 'SUZANO';
+    else if(uf === 'MG')this.EnderecoRecebido.localidade = 'CAMPOS GERAIS';
+    else if(uf === 'Selecione')this.EnderecoRecebido.localidade = 'Selecione';
   }
 
 }

@@ -10,7 +10,7 @@ import { CepServiceService } from '../cep-service.service';
 })
 export class CepComponentComponent implements OnInit {
 
-  cep = new FormControl('08615050',[Validators.required]);
+  inputText_cep = new FormControl('08615050',[Validators.required]);
   EnderecoObj: Endereco;
   loading: boolean;
 
@@ -27,22 +27,9 @@ export class CepComponentComponent implements OnInit {
   {
     this.loading = true;  
 
-    setTimeout(() => {
-      
-    
-    
-    this.EnderecoObj = { cep:"", bairro:"",
-                        complemento:"",
-                        ddd:"",
-                        gia:"",
-                        ibge:"",
-                        localidade:"",
-                        logradouro:"",
-                        siafi:"",
-                        uf:""
-                      };
+    this.EnderecoObj = new Endereco();
   
-     this.service.consultaCep(this.cep.value).subscribe({
+     this.service.consultaCep(this.inputText_cep.value).subscribe({
        next: (Endereco: Endereco) =>  
        { 
          
@@ -56,6 +43,5 @@ export class CepComponentComponent implements OnInit {
         this.loading = false;
         }
      });
-    }, 2000);
   }
 }
