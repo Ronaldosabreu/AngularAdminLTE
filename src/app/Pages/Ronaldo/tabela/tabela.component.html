@@ -13,7 +13,8 @@
   <div class="col-md-2 col-xs-12" id="divcboProduto">
       <label for="txtProduto">Produto</label>
       <select name="cboProduto" id="cboProduto" class="form-control" (change)="buscarProdutoProposta($event.target)" >
-          <option [value]="produto" *ngFor="let produto of produtosSelect">{{produto}}</option>
+        <option [value]="-1" >TODOS</option>
+        <option [value]="produto" *ngFor="let produto of produtosSelect">{{produto}}</option>
       </select>
   </div>
 
@@ -34,8 +35,9 @@
 
   <div class="col-md-2 col-xs-12" id="divcboStatusDetalhado">
       <label for="txtBuscaStatusDetalhado">Status Detalhado</label>
-      <select name="cboStatusDetalhado" id="cboStatusDetalhado" class="form-control">
-          <option value="">Selecione aqui</option>
+      <select name="cboStatusDetalhado" id="cboStatusDetalhado" class="form-control"  (change)="buscarStatusDetalhado($event.target)">
+          <option [value]="-1" >TODOS</option>
+          <option [value]="status_detail" *ngFor="let status_detail of statusDetalhadoSelect">{{status_detail}}</option>
       </select>
   </div>
 

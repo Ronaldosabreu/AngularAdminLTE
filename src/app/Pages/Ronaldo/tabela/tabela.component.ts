@@ -19,6 +19,7 @@ export class TabelaComponent implements OnInit
   tabelaPropostaObj: Proposta[];
   
   produtosSelect: string[];
+  statusDetalhadoSelect: string[];
 
   @ViewChild(DataTableDirective, {static: false})
   datatableElement: DataTableDirective;
@@ -112,8 +113,8 @@ export class TabelaComponent implements OnInit
         this.dtTrigger.next(null);
       },
       complete: ()=>{
-        this.buscarTipoProduto()
-        
+        this.popularSelectProduto()
+        this.statusDetalhadoSelectProduto();
       },
       error: ()=>{}
     });
@@ -121,7 +122,7 @@ export class TabelaComponent implements OnInit
   }
 
   
-  buscarTipoProduto()
+  popularSelectProduto()
   {
     var produto:any = [];
     this.tabelaPropostaObj.forEach((e)=>{ produto.push(e.produto) });
@@ -129,13 +130,37 @@ export class TabelaComponent implements OnInit
     this.produtosSelect = produto.filter(function(este:string, i:string) {
         return produto.indexOf(este) === i;
     });
-    console.log(this.produtosSelect);
+  }
+
+    
+  statusDetalhadoSelectProduto()
+  {
+    var descricao_credito:any = [];
+    this.tabelaPropostaObj.forEach((e)=>{ descricao_credito.push(e.status.descricao_credito) });
+
+    this.statusDetalhadoSelect = descricao_credito.filter(function(este:string, i:string) {
+        return descricao_credito.indexOf(este) === i;
+    });
+  }
+
+  buscarStatusDetalhado(valor: any)
+  {
+    this.datatableElement.dtInstance.then((dtInstance: DataTables.Api) => 
+    {
+      if (valor.value == '-1')
+          dtInstance.columns(5).search('').draw();
+      else
+          dtInstance.columns(5).search(valor.value).draw();
+    });
   }
 
   buscarProdutoProposta(valor: any)
   {
     this.datatableElement.dtInstance.then((dtInstance: DataTables.Api) => 
     {
+      if (valor.value == '-1')
+          dtInstance.columns(7).search('').draw();
+      else
           dtInstance.columns(7).search(valor.value).draw();
     });
   }
