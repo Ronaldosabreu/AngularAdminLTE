@@ -15,7 +15,8 @@ import { NavegacaoModule } from './Shared/navegacao.module';
 import ptBr from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { LoadingComponent } from './Pages/loading/loading.component';
+import { TabelaComponent } from './Pages/Ronaldo/tabela/tabela.component';
+import { DataTablesModule } from 'angular-datatables';
 
 registerLocaleData(ptBr);
 // **************************************************
@@ -23,7 +24,8 @@ registerLocaleData(ptBr);
 @NgModule({
   declarations: [	
     AppComponent,
-      CadastroComponent
+      CadastroComponent,
+      TabelaComponent
    ],
   imports: [
     BrowserModule,
@@ -34,7 +36,8 @@ registerLocaleData(ptBr);
     NgBrazil,
     CustomFormsModule,
     NavegacaoModule,
-    HttpClientModule
+    HttpClientModule,
+    DataTablesModule
   ],
   providers: [
      // ************************************

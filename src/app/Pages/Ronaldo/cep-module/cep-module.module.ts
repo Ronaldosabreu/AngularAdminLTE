@@ -8,13 +8,14 @@ import { EnderecoComponentComponent } from './endereco-component/endereco-compon
 import { LoadingComponent } from '../../loading/loading.component';
 
 
+
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
     CepRoutes,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
   declarations: 
   [

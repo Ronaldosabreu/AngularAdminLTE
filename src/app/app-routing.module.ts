@@ -5,6 +5,7 @@ import { CadastroComponent } from './Pages/Demos/ReactiveForms/Cadastro/Cadastro
 import { ObservableComponent } from './Pages/Estudos_DevIO/Observable/Observable.component';
 import { PromiseComponent } from './Pages/Estudos_DevIO/Promise/Promise.component';
 import { HomeComponent } from './Shared/home/home.component';
+import { TabelaComponent } from './Pages/Ronaldo/tabela/tabela.component';
 
 export const routes: Routes = [
   {path:'',redirectTo:'/home', pathMatch:'full'},
@@ -12,6 +13,7 @@ export const routes: Routes = [
   {path:'promise',component: PromiseComponent},
   {path:'observable',component: ObservableComponent},
   {path:'contato',component: ContatoComponent},
+  {path:'tabela',component: TabelaComponent},
   {path:'cadastro',component: CadastroComponent},
   {
     path: 'produtos', 
