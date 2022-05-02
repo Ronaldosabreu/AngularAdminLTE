@@ -1,7 +1,8 @@
 
  <!-- "node_modules/admin-lte/plugins/jquery/jquery.js", -->
 
- <th><input type="text" placeholder="Search ID" name="search-id"  id="search-id"/></th>
+
+ <input type="text" placeholder="Search ID" (keyup)="buscarIdProposta($event.target)"/>
 
   <table datatable 
     [dtOptions]="dtOptions"
@@ -31,16 +32,12 @@
           <tr *ngFor="let p of tabelaPropostaObj">
             <td>{{ p.id_proposta }}</td>
             <td>{{ p.cpf_cliente }}</td>
-            <!-- <td>{{ p.datas.envio }}</td>
+            <td>{{ p.datas.envio }}</td>
             <td>{{ p.valores.credito_solicitado }}</td>
             <td>{{ p.valores.taxa_juros_anual }}</td>
             <td>{{ p.status.descricao_credito }}</td>
             <td>{{ p.canal_entrada }}</td>
-            <td>{{ p.produto }}</td> -->
+            <td>{{ p.produto }}</td>
         </tr>
       </tbody>
-      
-      
-          
-      
     </table>
