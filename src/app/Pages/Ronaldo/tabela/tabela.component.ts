@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import { TabelaService } from './tabela.service';
 import { Proposta } from './tabela_module';
 import { DataTableDirective } from 'angular-datatables';
+import { Produto } from '../../Demos/Arquitetura/models/produto';
 
 @Component({
   selector: 'app-tabela',
@@ -17,6 +18,8 @@ export class TabelaComponent implements OnInit
 
   tabelaPropostaObj: Proposta[];
   
+  produtosSelect: string[];
+
   @ViewChild(DataTableDirective, {static: false})
   datatableElement: DataTableDirective;
   
@@ -108,21 +111,39 @@ export class TabelaComponent implements OnInit
         this.tabelaPropostaObj = proposta
         this.dtTrigger.next(null);
       },
-      complete: ()=>{},
+      complete: ()=>{
+        this.buscarTipoProduto()
+        
+      },
       error: ()=>{}
     });
+
   }
 
   
-buscarIdProposta(valor: any)
-{
-  this.datatableElement.dtInstance.then((dtInstance: DataTables.Api) => 
+  buscarTipoProduto()
   {
-        dtInstance.columns(0).search(valor.value).draw();
-  });
-}
+    
+    var produto:any = [];
+    this.tabelaPropostaObj.forEach((e)=>{ produto.push(e.produto) });
 
-  ngOnDestroy(): void {
+    this.produtosSelect = produto.filter(function(este:string, i:string) {
+        return produto.indexOf(este) === i;
+    });
+    console.log(this.produtosSelect);
+    
+  }
+
+  buscarIdProposta(valor: any)
+  {
+    this.datatableElement.dtInstance.then((dtInstance: DataTables.Api) => 
+    {
+          dtInstance.columns(0).search(valor.value).draw();
+    });
+  }
+
+  ngOnDestroy(): void 
+  {
     // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();
   }

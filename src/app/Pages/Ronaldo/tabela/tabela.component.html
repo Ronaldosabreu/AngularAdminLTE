@@ -1,8 +1,58 @@
 
  <!-- "node_modules/admin-lte/plugins/jquery/jquery.js", -->
 
+ <div class="row" style="margin-bottom: 1em; margin-top: 1.333em;">
 
- <input type="text" placeholder="Search ID" (keyup)="buscarIdProposta($event.target)"/>
+
+  <div class="col-md-2 col-xs-12" >
+    <label for="cboProposta">Proposta</label>
+    <input type="text"  class="form-control" name="cboProposta" placeholder="Busca por Proposta" (keyup)="buscarIdProposta($event.target)"/>
+  </div>
+
+
+  <div class="col-md-2 col-xs-12" id="divcboProduto">
+      <label for="txtProduto">Produto</label>
+      <select name="cboProduto" id="cboProduto" class="form-control" >
+          <option [value]="produto" *ngFor="let produto of produtosSelect">{{produto}}</option>
+      </select>
+  </div>
+
+
+
+  <div class="col-md-2 col-xs-12" id="divcboStatus">
+      <label for="txtBuscaStatus">Fase</label>
+      <select name="cboStatus" id="cboStatus" class="form-control">
+          <option value="">Selecione aqui</option>
+          <option value="42">Análise de crédito</option>
+          <option value="43">Envio de documentos formalização</option>
+          <option value="44">Análise de documentos e avaliação do imóvel</option>
+          <option value="45">Confirmação de dados e valores</option>
+          <option value="46">Emissão de Contrato</option>
+          <option value="47">Liberação de Crédito</option>
+      </select>
+  </div>
+
+  <div class="col-md-2 col-xs-12" id="divcboStatusDetalhado">
+      <label for="txtBuscaStatusDetalhado">Status Detalhado</label>
+      <select name="cboStatusDetalhado" id="cboStatusDetalhado" class="form-control">
+          <option value="">Selecione aqui</option>
+      </select>
+  </div>
+
+  <div class="col-md-2 col-xs-12" id="divBuscaNomeCliente" style="display: none;">
+      <label for="txtBuscaNomeCliente">Pesquisar pelo nome</label>
+      <input class="form-control" type="text" id="txtBuscaNomeCliente" placeholder="Ex: Maria Silva">
+  </div>
+
+
+  <div class="col-md-2 col-xs-12" id="divResponsavelEnvio" style="display: none;">
+      <label for="txtBuscaResponsavelEnvio">Pesquisar por responsável pelo envio</label>
+      <input class="form-control" type="text" id="txtResponsavelEnvio" placeholder="Ex: Joao Silva">
+  </div>
+
+
+
+</div>
 
   <table datatable 
     [dtOptions]="dtOptions"
