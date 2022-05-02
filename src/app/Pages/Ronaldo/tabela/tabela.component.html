@@ -1,6 +1,71 @@
 
  <!-- "node_modules/admin-lte/plugins/jquery/jquery.js", -->
 
+ <div class="row">
+  <div class="col-lg-3 col-6">
+    <!-- small box -->
+    <a (click)="mudarSelectStatusDetalhado('Aprovada automaticamente')" style="cursor: pointer;">
+    <div class="small-box bg-info">
+      <div class="inner">
+        <h3>{{countDescricaoCredito}}</h3>
+
+        <p>PROPOSTAS ENVIADAS</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-bag"></i>
+      </div>
+      <a class="small-box-footer">em financiamento - detalhes <i c lass="fas fa-arrow-circle-right"></i></a>
+    </div>
+  </a>
+  </div>
+  <!-- ./col -->
+  <div class="col-lg-3 col-6">
+    <!-- small box -->
+    <div class="small-box bg-success">
+      <div class="inner">
+        <h3>0</h3>
+
+        <p>PROPOSTA APROVADAS</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-stats-bars"></i>
+      </div>
+      <a href="#" class="small-box-footer">em financiamento - detalhes <i class="fas fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+  <!-- ./col -->
+  <div class="col-lg-3 col-6">
+    <!-- small box -->
+    <div class="small-box bg-warning">
+      <div class="inner">
+        <h3>0</h3>
+
+        <p>PROPOSTAS CONDICIONADAS</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-person-add"></i>
+      </div>
+      <a href="#" class="small-box-footer">em financiamento - detalhes <i class="fas fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+  <!-- ./col -->
+  <div class="col-lg-3 col-6">
+    <!-- small box -->
+    <div class="small-box bg-danger">
+      <div class="inner">
+        <h3>0</h3>
+
+        <p>PROPOSAS RECUSADAS</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-pie-graph"></i>
+      </div>
+      <a href="#" class="small-box-footer">em financiamento - detalhes <i class="fas fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+  <!-- ./col -->
+</div>
+
  <div class="row" style="margin-bottom: 1em; margin-top: 1.333em;">
 
 
@@ -19,25 +84,15 @@
   </div>
 
 
-
-  <div class="col-md-2 col-xs-12" id="divcboStatus">
-      <label for="txtBuscaStatus">Fase</label>
-      <select name="cboStatus" id="cboStatus" class="form-control">
-          <option value="">Selecione aqui</option>
-          <option value="42">Análise de crédito</option>
-          <option value="43">Envio de documentos formalização</option>
-          <option value="44">Análise de documentos e avaliação do imóvel</option>
-          <option value="45">Confirmação de dados e valores</option>
-          <option value="46">Emissão de Contrato</option>
-          <option value="47">Liberação de Crédito</option>
-      </select>
-  </div>
-
   <div class="col-md-2 col-xs-12" id="divcboStatusDetalhado">
       <label for="txtBuscaStatusDetalhado">Status Detalhado</label>
-      <select name="cboStatusDetalhado" id="cboStatusDetalhado" class="form-control"  (change)="buscarStatusDetalhado($event.target)">
+      <select name="cboStatusDetalhado" id="cboStatusDetalhado" class="form-control"
+      
+      (change)="buscarStatusDetalhado($any($event.target).value)">
           <option [value]="-1" >TODOS</option>
-          <option [value]="status_detail" *ngFor="let status_detail of statusDetalhadoSelect">{{status_detail}}</option>
+          <option [value]="status_detail" 
+          [selected]="status_detail == statusDetalhadoSelected"
+          *ngFor="let status_detail of statusDetalhadoSelectObj">{{status_detail}}</option>
       </select>
   </div>
 

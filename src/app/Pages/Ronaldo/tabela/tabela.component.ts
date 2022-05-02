@@ -19,7 +19,12 @@ export class TabelaComponent implements OnInit
   tabelaPropostaObj: Proposta[];
   
   produtosSelect: string[];
-  statusDetalhadoSelect: string[];
+  statusDetalhadoSelectObj: string[];
+  statusDetalhadoSelected:string;
+
+  countDescricaoCredito: number = 0;
+
+  
 
   @ViewChild(DataTableDirective, {static: false})
   datatableElement: DataTableDirective;
@@ -98,11 +103,15 @@ export class TabelaComponent implements OnInit
     // ]
 
     };
-
-
-
-   this.consultarTabela()
+  this.consultarTabela()
   }
+
+mudarSelectStatusDetalhado(valor: string)
+{
+  this.statusDetalhadoSelected = valor;
+  this.buscarStatusDetalhado(valor)
+
+}
 
   consultarTabela()
   {
@@ -114,7 +123,7 @@ export class TabelaComponent implements OnInit
       },
       complete: ()=>{
         this.popularSelectProduto()
-        this.statusDetalhadoSelectProduto();
+        this.StatusDetalhadoSelect();
       },
       error: ()=>{}
     });
@@ -133,12 +142,22 @@ export class TabelaComponent implements OnInit
   }
 
     
-  statusDetalhadoSelectProduto()
+  StatusDetalhadoSelect()
   {
     var descricao_credito:any = [];
-    this.tabelaPropostaObj.forEach((e)=>{ descricao_credito.push(e.status.descricao_credito) });
+    
+    this.tabelaPropostaObj.forEach(
+      (e)=>
+      {
+         descricao_credito.push(e.status.descricao_credito) 
 
-    this.statusDetalhadoSelect = descricao_credito.filter(function(este:string, i:string) {
+         if (e.status.descricao_credito ==="Aprovada automaticamente")
+         {
+                  this.countDescricaoCredito = this.countDescricaoCredito + 1
+         }
+      });
+
+    this.statusDetalhadoSelectObj = descricao_credito.filter(function(este:string, i:string) {
         return descricao_credito.indexOf(este) === i;
     });
   }
@@ -147,11 +166,12 @@ export class TabelaComponent implements OnInit
   {
     this.datatableElement.dtInstance.then((dtInstance: DataTables.Api) => 
     {
-      if (valor.value == '-1')
+      if (valor == '-1')
           dtInstance.columns(5).search('').draw();
       else
-          dtInstance.columns(5).search(valor.value).draw();
+          dtInstance.columns(5).search(valor).draw();
     });
+    this.statusDetalhadoSelected = valor;
   }
 
   buscarProdutoProposta(valor: any)
