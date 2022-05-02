@@ -123,7 +123,6 @@ export class TabelaComponent implements OnInit
   
   buscarTipoProduto()
   {
-    
     var produto:any = [];
     this.tabelaPropostaObj.forEach((e)=>{ produto.push(e.produto) });
 
@@ -131,7 +130,14 @@ export class TabelaComponent implements OnInit
         return produto.indexOf(este) === i;
     });
     console.log(this.produtosSelect);
-    
+  }
+
+  buscarProdutoProposta(valor: any)
+  {
+    this.datatableElement.dtInstance.then((dtInstance: DataTables.Api) => 
+    {
+          dtInstance.columns(7).search(valor.value).draw();
+    });
   }
 
   buscarIdProposta(valor: any)

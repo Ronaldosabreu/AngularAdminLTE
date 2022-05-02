@@ -12,7 +12,7 @@
 
   <div class="col-md-2 col-xs-12" id="divcboProduto">
       <label for="txtProduto">Produto</label>
-      <select name="cboProduto" id="cboProduto" class="form-control" >
+      <select name="cboProduto" id="cboProduto" class="form-control" (change)="buscarProdutoProposta($event.target)" >
           <option [value]="produto" *ngFor="let produto of produtosSelect">{{produto}}</option>
       </select>
   </div>
