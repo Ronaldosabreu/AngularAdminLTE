@@ -35,12 +35,12 @@ export class Status
 
 export class Valores
 {
-    credito_solicitado: string;
-    prazo_solicitado: string;
-    credito_aprovado: string;
-    prazo_aprovado: string;
-    taxa_juros_anual: string;
-    total_credito: string;
+    credito_solicitado: number;
+    prazo_solicitado: number;
+    credito_aprovado: number;
+    prazo_aprovado: number;
+    taxa_juros_anual: number;
+    total_credito: number;
 }
 
 export class Comercial

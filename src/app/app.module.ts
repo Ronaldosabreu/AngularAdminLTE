@@ -17,6 +17,8 @@ import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { TabelaComponent } from './Pages/Ronaldo/tabela/tabela.component';
 import { DataTablesModule } from 'angular-datatables';
+import { PipeTransformCPF } from './Utils/pipeTransform.pipe';
+
 
 registerLocaleData(ptBr);
 // **************************************************
@@ -25,7 +27,8 @@ registerLocaleData(ptBr);
   declarations: [	
     AppComponent,
       CadastroComponent,
-      TabelaComponent
+      TabelaComponent,
+      PipeTransformCPF
    ],
   imports: [
     BrowserModule,

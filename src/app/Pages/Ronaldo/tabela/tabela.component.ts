@@ -22,9 +22,15 @@ export class TabelaComponent implements OnInit
   statusDetalhadoSelectObj: string[];
   statusDetalhadoSelected:string;
 
-  countDescricaoCredito: number = 0;
+  countPropostas: number = 0;
+  countPropostaAprovadas: number = 0;
+  countPropostaRecusadas: number = 0
+  countAprovacaoCondicionada: number = 0
 
-  
+  somarTotalPropostas: number= 0.0;
+  somarTotalAprovada: number= 0.0;
+  somarTotalRecusadas: number= 0.0;
+  somarTotalCondicionadas: number= 0.0;
 
   @ViewChild(DataTableDirective, {static: false})
   datatableElement: DataTableDirective;
@@ -151,10 +157,32 @@ mudarSelectStatusDetalhado(valor: string)
       {
          descricao_credito.push(e.status.descricao_credito) 
 
-         if (e.status.descricao_credito ==="Aprovada automaticamente")
-         {
-                  this.countDescricaoCredito = this.countDescricaoCredito + 1
-         }
+       
+
+          this.countPropostas = this.countPropostas + 1
+          this.somarTotalPropostas +=e.valores.credito_solicitado
+
+          if (e.status.descricao_credito ==="Aprovada automaticamente"){
+            this.countPropostaAprovadas = this.countPropostaAprovadas + 1
+            this.somarTotalAprovada +=e.valores.credito_solicitado
+          }
+
+          if (e.status.descricao_credito ==="Aprovação Condicionada")
+          {
+            this.countAprovacaoCondicionada = this.countAprovacaoCondicionada + 1
+            this.somarTotalCondicionadas +=e.valores.credito_solicitado
+          }
+
+          if (e.status.descricao_credito ==="Proposta Recusada"){
+            this.countPropostaRecusadas = this.countPropostaRecusadas + 1
+            this.somarTotalRecusadas +=e.valores.credito_solicitado
+          }
+
+          
+          
+          
+          
+
       });
 
     this.statusDetalhadoSelectObj = descricao_credito.filter(function(este:string, i:string) {

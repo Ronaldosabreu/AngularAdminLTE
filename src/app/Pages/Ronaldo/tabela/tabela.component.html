@@ -4,64 +4,71 @@
  <div class="row">
   <div class="col-lg-3 col-6">
     <!-- small box -->
-    <a (click)="mudarSelectStatusDetalhado('Aprovada automaticamente')" style="cursor: pointer;">
+    <a (click)="mudarSelectStatusDetalhado('-1')" style="cursor: pointer;">
     <div class="small-box bg-info">
       <div class="inner">
-        <h3>{{countDescricaoCredito}}</h3>
+        <h3>{{countPropostas}}</h3>
 
-        <p>PROPOSTAS ENVIADAS</p>
+        <p>TODAS PROPOSTAS "ENVIADAS"</p>
       </div>
       <div class="icon">
         <i class="ion ion-bag"></i>
       </div>
-      <a class="small-box-footer">em financiamento - detalhes <i c lass="fas fa-arrow-circle-right"></i></a>
+      <a class="small-box-footer">{{somarTotalPropostas | currency : 'BRL'}} em financiamento - detalhes <i class="fas fa-arrow-circle-right"></i></a>
     </div>
   </a>
   </div>
   <!-- ./col -->
   <div class="col-lg-3 col-6">
     <!-- small box -->
+    
+    <a (click)="mudarSelectStatusDetalhado('Aprovada automaticamente')" style="cursor: pointer;">
     <div class="small-box bg-success">
       <div class="inner">
-        <h3>0</h3>
+        <h3>{{countPropostaAprovadas}}</h3>
 
         <p>PROPOSTA APROVADAS</p>
       </div>
       <div class="icon">
         <i class="ion ion-stats-bars"></i>
       </div>
-      <a href="#" class="small-box-footer">em financiamento - detalhes <i class="fas fa-arrow-circle-right"></i></a>
+      <a class="small-box-footer">{{somarTotalAprovada | currency : 'BRL'}} em financiamento - detalhes <i class="fas fa-arrow-circle-right"></i></a>
     </div>
+  </a>
   </div>
   <!-- ./col -->
   <div class="col-lg-3 col-6">
     <!-- small box -->
+    <a (click)="mudarSelectStatusDetalhado('Aprovação Condicionada')" style="cursor: pointer;">
     <div class="small-box bg-warning">
       <div class="inner">
-        <h3>0</h3>
+        <h3>{{countAprovacaoCondicionada}}</h3>
 
         <p>PROPOSTAS CONDICIONADAS</p>
       </div>
       <div class="icon">
         <i class="ion ion-person-add"></i>
       </div>
-      <a href="#" class="small-box-footer">em financiamento - detalhes <i class="fas fa-arrow-circle-right"></i></a>
+      <a href="#" class="small-box-footer">{{somarTotalCondicionadas | currency : 'BRL'}} em financiamento - detalhes <i class="fas fa-arrow-circle-right"></i></a>
     </div>
+  </a>
   </div>
   <!-- ./col -->
   <div class="col-lg-3 col-6">
     <!-- small box -->
+    <a (click)="mudarSelectStatusDetalhado('Proposta Recusada')" style="cursor: pointer;">
     <div class="small-box bg-danger">
       <div class="inner">
-        <h3>0</h3>
+        <h3>{{countPropostaRecusadas}}</h3>
 
         <p>PROPOSAS RECUSADAS</p>
       </div>
       <div class="icon">
         <i class="ion ion-pie-graph"></i>
       </div>
-      <a href="#" class="small-box-footer">em financiamento - detalhes <i class="fas fa-arrow-circle-right"></i></a>
+      <a href="#" class="small-box-footer">{{somarTotalRecusadas | currency : 'BRL'}}em financiamento - detalhes <i class="fas fa-arrow-circle-right"></i></a>
     </div>
+  </a>
   </div>
   <!-- ./col -->
 </div>
@@ -113,6 +120,7 @@
 </div>
 
   <table datatable 
+  responsive
     [dtOptions]="dtOptions"
     [dtTrigger]="dtTrigger"
       class="table 
@@ -139,10 +147,10 @@
       <tbody >
           <tr *ngFor="let p of tabelaPropostaObj">
             <td>{{ p.id_proposta }}</td>
-            <td>{{ p.cpf_cliente }}</td>
-            <td>{{ p.datas.envio }}</td>
-            <td>{{ p.valores.credito_solicitado }}</td>
-            <td>{{ p.valores.taxa_juros_anual }}</td>
+            <td>{{ p.cpf_cliente | cpf}}</td>
+            <td>{{ p.datas.envio | date: 'dd/MM/yyyy' }}</td>
+            <td>{{ p.valores.credito_solicitado | currency : 'BRL' }}</td>
+            <td>{{ p.valores.taxa_juros_anual.toFixed(2)}}</td>
             <td>{{ p.status.descricao_credito }}</td>
             <td>{{ p.canal_entrada }}</td>
             <td>{{ p.produto }}</td>
