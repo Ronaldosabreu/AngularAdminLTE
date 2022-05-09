@@ -46,11 +46,10 @@ export class TabelaComponent implements OnInit
 
     this.dtOptions = 
     {
-    
       pagingType: 'full_numbers',
       pageLength: 5,
       order: [[0, 'desc']],
-      responsive: true,
+      
       "language": {
                     "url": "https://cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json"
                   },
@@ -62,17 +61,14 @@ export class TabelaComponent implements OnInit
         'print',
         'excel',
       ],
-    //   "columnDefs": [
-    //     {
-    //         "targets": [ 0 ],
-    //         "visible": true,
-    //         "searchable": true
-    //     },
-    //     {
-    //         "targets": [ 0 ],
-    //         "visible": true
-    //     }
-    // ],
+      "columnDefs": [
+        {
+            "targets": [ 1 ],
+            "visible": true,
+            "searchable": true,
+            "width": "85px" 
+        }
+    ],
     // columns: [
     //   {
     //     title: 'id_proposta',
@@ -104,10 +100,10 @@ export class TabelaComponent implements OnInit
     //   },
     //   {
     //     title: 'produto',
-    //     data: 'produto'
+    //     data: 'produto',
     //   },
-    // ]
-
+    // ],
+    responsive: true
     };
   this.consultarTabela()
   }

@@ -25,6 +25,11 @@ export const routes: Routes = [
     loadChildren: () => import('./Pages/Ronaldo/cep-module/cep-module.module')
     .then(m=>m.CepModuleModule)
   },
+  {
+    path: 'tabelapo_ui', 
+    loadChildren: () => import('./Pages/Ronaldo/RonaldoPO_UI/TabelaPO_UI/TabelaPO_UI.module')
+    .then(m=>m.TabelaPO_UIModule)
+  },
   
   // {path: 'menu', component: MenuComponent,
   //                 children: [

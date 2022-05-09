@@ -14,7 +14,7 @@
       <div class="icon">
         <i class="ion ion-bag"></i>
       </div>
-      <a class="small-box-footer">{{somarTotalPropostas | currency : 'BRL'}} em financiamento - detalhes <i class="fas fa-arrow-circle-right"></i></a>
+      <a class="small-box-footer">{{somarTotalPropostas | currencyBrazil :''}} em financiamento - detalhes <i class="fas fa-arrow-circle-right"></i></a>
     </div>
   </a>
   </div>
@@ -49,7 +49,7 @@
       <div class="icon">
         <i class="ion ion-person-add"></i>
       </div>
-      <a href="#" class="small-box-footer">{{somarTotalCondicionadas | currency : 'BRL'}} em financiamento - detalhes <i class="fas fa-arrow-circle-right"></i></a>
+      <a  class="small-box-footer">{{somarTotalCondicionadas | currency : 'BRL'}} em financiamento - detalhes <i class="fas fa-arrow-circle-right"></i></a>
     </div>
   </a>
   </div>
@@ -66,7 +66,7 @@
       <div class="icon">
         <i class="ion ion-pie-graph"></i>
       </div>
-      <a href="#" class="small-box-footer">{{somarTotalRecusadas | currency : 'BRL'}}em financiamento - detalhes <i class="fas fa-arrow-circle-right"></i></a>
+      <a  class="small-box-footer">{{somarTotalRecusadas | currency : 'BRL'}}em financiamento - detalhes <i class="fas fa-arrow-circle-right"></i></a>
     </div>
   </a>
   </div>
@@ -120,18 +120,12 @@
 </div>
 
   <table datatable 
-  responsive
-    [dtOptions]="dtOptions"
-    [dtTrigger]="dtTrigger"
-      class="table 
-      
-                          row-border 
-                          table-bordered 
-                          table-striped 
-                          dataTable 
-                          dtr-inline 
-                          collapsed" 
-  aria-describedby="example1_info">
+          [dtOptions]="dtOptions"
+          [dtTrigger]="dtTrigger"
+          class="row-border
+          table table-bordered table-hover dataTable dtr-inline collapsed" 
+          aria-describedby="example2_info"
+  >
        <thead>
         <tr>
           <th>PROPOSTA</th>
@@ -147,7 +141,7 @@
       <tbody >
           <tr *ngFor="let p of tabelaPropostaObj">
             <td>{{ p.id_proposta }}</td>
-            <td>{{ p.cpf_cliente | cpf}}</td>
+            <td>{{ p.cpf_cliente | pipeCPF}}</td>
             <td>{{ p.datas.envio | date: 'dd/MM/yyyy' }}</td>
             <td>{{ p.valores.credito_solicitado | currency : 'BRL' }}</td>
             <td>{{ p.valores.taxa_juros_anual.toFixed(2)}}</td>
@@ -157,3 +151,4 @@
         </tr>
       </tbody>
     </table>
+  

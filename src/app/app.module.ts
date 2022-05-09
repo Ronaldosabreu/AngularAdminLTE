@@ -18,7 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TabelaComponent } from './Pages/Ronaldo/tabela/tabela.component';
 import { DataTablesModule } from 'angular-datatables';
 import { PipeTransformCPF } from './Utils/pipeTransform.pipe';
-
+import { PoModule } from '@po-ui/ng-components';
 
 registerLocaleData(ptBr);
 // **************************************************
@@ -29,7 +29,7 @@ registerLocaleData(ptBr);
       CadastroComponent,
       TabelaComponent,
       PipeTransformCPF
-   ],
+       ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -40,7 +40,8 @@ registerLocaleData(ptBr);
     CustomFormsModule,
     NavegacaoModule,
     HttpClientModule,
-    DataTablesModule
+    DataTablesModule,
+    PoModule
   ],
   providers: [
      // ************************************
