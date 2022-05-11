@@ -11,12 +11,7 @@
 
   <form class="mbr-form" [formGroup]="menuForm">
       <div class="row row-sm-offset">
-          <div class="col-md-4 multi-horizontal" data-for="name">
-              <div class="form-group">
-                  <label class="form-control-label mbr-fonts-style display-7" >ID</label>
-                  <input type="text" class="form-control" name="ID" [ngModel]="menu?.id" formControlName="id">
-              </div>
-          </div>
+
           <div class="col-md-4 multi-horizontal" data-for="email">
               <div class="form-group">
                   <label class="form-control-label mbr-fonts-style display-7">Menu</label>
@@ -37,11 +32,12 @@
 
       <span class="input-group-btn">
           <button type="submit" class="btn btn-primary btn-form display-4" (click)="updateMenu(menuForm.value)"
-          [disabled]="!menuForm.valid || !menuForm.value.id">Editar</button>
+          [disabled]="!menuForm.valid">Confirmar Editar</button> -
+
           <button class="btn btn-danger" (click)="postMenu(menuForm.value)"
           [disabled]="!menuForm.valid || menuForm.value.id" >CRIAR MENU</button>
-          <button class="btn btn-primary" (click)="deleteMenu(menuForm.value)"
-          [disabled]="!menuForm.valid || !menuForm.value.id">DELETA MENU</button>
+
+          
       </span>
   </form>
 
@@ -53,17 +49,49 @@
           <th>LINK</th>
           <th>ADMIN</th>
           <th>EXACT</th>
+          <th>#</th>
         </tr>
     </thead>
             <tbody>
-              <tr *ngFor="let item of Menus" (click)="populaMenu(item)">
+              <tr *ngFor="let item of Menus" >
                 <td>{{item.id}}</td>
                 <td>{{item.name}}</td>
                 <td>{{item.link}}</td>
                 <td>{{item.admin}}</td>
                 <td>{{item.exact}}</td>
+                <td>
+                    <button class="btn btn-danger" data-toggle="modal" data-target="#modal-default"
+                    (click)="modalExcluir(item)" > Excluir </button> 
+                    - 
+                    <button class="btn btn-primary" (click)="populaTabelaMenu(item)"> Editar </button>
+                </td>
             </tr>
         </tbody>
   </table>
+  <!-- (click)="deleteItemMenuTabela(item.id) -->
 </div>
 <br>
+
+  <div class="modal fade" id="modal-default" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Excluir Menu: {{menuClicadoExcluir?.name}}</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>tem certeza que deseja remover o menu: {{menuClicadoExcluir?.name}}</p>
+        </div>
+        <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-primary" (click)="deleteItemMenuTabela()" data-dismiss="modal">EXCLUIR</button>
+
+            <button type="button" class="btn btn-default" data-dismiss="modal">SAIR</button>
+          
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>

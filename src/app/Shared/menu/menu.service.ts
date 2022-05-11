@@ -25,11 +25,13 @@ export class MenusService {
    
     return this.http.post<Menu>(this.UrlServiceMenu  + "menus", menu,{ headers: this.header });
   }
-  update(id: string, menu: Menu): Observable<Menu>
+  update(menu: Menu): Observable<Menu>
   {
-   
-    return this.http.put<Menu>(this.UrlServiceMenu  + "menus/" + id, menu,{ headers: this.header });
+    //patch edita parte do objeto
+    //put edita parte do objeto
+    return this.http.patch<Menu>(this.UrlServiceMenu  + "menus/" + menu.id, menu , { headers: this.header });
   }
+
   delete(id: string): Observable<any>
   {
    

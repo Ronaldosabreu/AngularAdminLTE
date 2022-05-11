@@ -14,6 +14,10 @@ export class ContatoComponent implements OnInit
   Menus: Menu[];
 
   menuForm: FormGroup;
+
+  menuIdClicado: string;
+  menuClicadoExcluir: Menu;
+
   constructor(private menuService: MenusService, private fb: FormBuilder) { }
   ngOnInit() 
   {
@@ -21,10 +25,8 @@ export class ContatoComponent implements OnInit
 
     this.menuForm =  this.fb.group(
       {
-         id: [''],
          name:['', Validators.required],
          link:[''],
-         
       });
   }
 
@@ -39,9 +41,6 @@ export class ContatoComponent implements OnInit
 
   postMenu(menu: Menu)
   {
-
-    menu.id = Math.random() * 100 + 1+"";
-
     this.menuService.post(menu).subscribe(() =>
     {
       alert("Inserido com sucesso");
@@ -52,29 +51,36 @@ export class ContatoComponent implements OnInit
 
   updateMenu(menu: Menu) 
   {
-    
-    this.menuService.update(menu.id, menu).subscribe(() =>
-    {
-      alert("Editado com sucesso");
-      this.carregarMenu();
-    });
-  };
+    menu.id = this.menuIdClicado;
 
-  deleteMenu(menu: Menu)
+    this.menuService.update(menu).subscribe({
+      next: () => { },
+      error: (e) => {},
+      complete: () => {  this.carregarMenu();},
+    });
+}
+
+
+  deleteItemMenuTabela()
   {
-    this.menuService.delete(menu.id).subscribe(() =>
+    this.menuService.delete(this.menuClicadoExcluir.id).subscribe(() =>
     {
       alert("Removido com sucesso");
       this.carregarMenu();
     });
   };
 
-  populaMenu(menu: Menu)
-  {
+
+  populaTabelaMenu(menu: Menu)
+  { 
+    this.menuIdClicado = menu.id;
     this.menu = menu;
   }
 
-  
+  modalExcluir(menuItem: Menu)
+  {
+    this.menuClicadoExcluir = menuItem;
+  }
 }
 
 
