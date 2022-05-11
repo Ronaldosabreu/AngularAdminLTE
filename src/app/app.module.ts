@@ -13,12 +13,13 @@ import { NavegacaoModule } from './Shared/navegacao.module';
 
 // **************************************************
 import ptBr from '@angular/common/locales/pt';
-import { registerLocaleData } from '@angular/common';
+import { registerLocaleData, CommonModule  } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { TabelaComponent } from './Pages/Ronaldo/tabela/tabela.component';
 import { DataTablesModule } from 'angular-datatables';
 import { PipeTransformCPF } from './Utils/pipeTransform.pipe';
 import { PoModule } from '@po-ui/ng-components';
+import { ContatoComponent } from './Pages/Estudos_DevIO/contato/contato.component';
 
 registerLocaleData(ptBr);
 // **************************************************
@@ -28,9 +29,11 @@ registerLocaleData(ptBr);
     AppComponent,
       CadastroComponent,
       TabelaComponent,
-      PipeTransformCPF
+      PipeTransformCPF,
+      ContatoComponent
        ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,

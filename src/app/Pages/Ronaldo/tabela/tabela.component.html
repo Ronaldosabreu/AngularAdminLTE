@@ -4,7 +4,7 @@
  <div class="row">
   <div class="col-lg-3 col-6">
     <!-- small box -->
-    <a (click)="mudarSelectStatusDetalhado('-1')" style="cursor: pointer;">
+    <a (click)="mudarSelectStatusDetalhado('-1')" >
     <div class="small-box bg-info">
       <div class="inner">
         <h3>{{countPropostas}}</h3>
@@ -22,7 +22,7 @@
   <div class="col-lg-3 col-6">
     <!-- small box -->
     
-    <a (click)="mudarSelectStatusDetalhado('Aprovada automaticamente')" style="cursor: pointer;">
+    <a (click)="mudarSelectStatusDetalhado('Aprovada automaticamente')" >
     <div class="small-box bg-success">
       <div class="inner">
         <h3>{{countPropostaAprovadas}}</h3>
@@ -39,7 +39,7 @@
   <!-- ./col -->
   <div class="col-lg-3 col-6">
     <!-- small box -->
-    <a (click)="mudarSelectStatusDetalhado('Aprovação Condicionada')" style="cursor: pointer;">
+    <a (click)="mudarSelectStatusDetalhado('Aprovação Condicionada')" >
     <div class="small-box bg-warning">
       <div class="inner">
         <h3>{{countAprovacaoCondicionada}}</h3>
@@ -56,7 +56,7 @@
   <!-- ./col -->
   <div class="col-lg-3 col-6">
     <!-- small box -->
-    <a (click)="mudarSelectStatusDetalhado('Proposta Recusada')" style="cursor: pointer;">
+    <a (click)="mudarSelectStatusDetalhado('Proposta Recusada')" >
     <div class="small-box bg-danger">
       <div class="inner">
         <h3>{{countPropostaRecusadas}}</h3>

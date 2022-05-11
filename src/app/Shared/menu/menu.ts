@@ -3,6 +3,7 @@ export interface Menus{
   }
   
   export interface Menu{
+    id: string,
     link: string,
     name: string,
     exact: boolean,

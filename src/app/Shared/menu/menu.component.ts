@@ -27,13 +27,13 @@ export class MenuComponent implements OnInit {
       this.menuService.obterMenus().subscribe({
         next: (data) => {
           this.menus = data;
-          console.log(data);
+          //console.log(data);
         },
         error: (e) => {
-          console.log(e);
+          //console.log(e);
         },
         complete: () => {
-          console.log('Requisição do menu completa');
+          //console.log('Requisição do menu completa');
         },
       });
   }

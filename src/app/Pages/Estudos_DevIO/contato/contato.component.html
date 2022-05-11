@@ -4,43 +4,66 @@
   <!-- Jumbotron Header -->
   <header class="my-4">
       <h1 class="display-3"> <b> Contato! </b></h1>
-      <button class="btn btn-danger" (click)="postMenu()">CRIAR MENU</button>
-      <button class="btn btn-warning" (click)="updateMenu()">ALTERA MENU</button>
-      <button class="btn btn-primary" (click)="deleteMenu()">DELETA MENU</button>
+      
+      
+      
   </header>
 
-  <form class="mbr-form">
+  <form class="mbr-form" [formGroup]="menuForm">
       <div class="row row-sm-offset">
           <div class="col-md-4 multi-horizontal" data-for="name">
               <div class="form-group">
-                  <label class="form-control-label mbr-fonts-style display-7" for="name-form1-2w">Nome</label>
-                  <input type="text" class="form-control" name="name" data-form-field="Name" required=""
-                      id="name-form1-2w">
+                  <label class="form-control-label mbr-fonts-style display-7" >ID</label>
+                  <input type="text" class="form-control" name="ID" [ngModel]="menu?.id" formControlName="id">
               </div>
           </div>
           <div class="col-md-4 multi-horizontal" data-for="email">
               <div class="form-group">
-                  <label class="form-control-label mbr-fonts-style display-7" for="email-form1-2w">E-mail</label>
-                  <input type="email" class="form-control" name="email" data-form-field="Email" required=""
-                      id="email-form1-2w">
+                  <label class="form-control-label mbr-fonts-style display-7">Menu</label>
+                  <input type="email" class="form-control" name="Menu" [ngModel]="menu?.name" formControlName="name">
               </div>
           </div>
           <div class="col-md-4 multi-horizontal" data-for="phone">
               <div class="form-group">
-                  <label class="form-control-label mbr-fonts-style display-7" for="phone-form1-2w">Telefone</label>
-                  <input type="tel" class="form-control" name="phone" data-form-field="Phone" id="phone-form1-2w">
+                  <label class="form-control-label mbr-fonts-style display-7">Link</label>
+                  <input type="text" class="form-control" name="Link" [ngModel]="menu?.link" formControlName="link">
               </div>
           </div>
       </div>
-      <div class="form-group" data-for="message">
-          <label class="form-control-label mbr-fonts-style display-7" for="message-form1-2w">Mensagem</label>
-          <textarea type="text" class="form-control" name="message" rows="7" data-form-field="Message"
-              id="message-form1-2w"></textarea>
-      </div>
+      <!-- <div class="form-group" data-for="message">
+          <label class="form-control-label mbr-fonts-style display-7">Descrição</label>
+          <textarea type="text" class="form-control" name="Descrição" rows="7"></textarea>
+      </div> -->
 
       <span class="input-group-btn">
-          <button href="" type="submit" class="btn btn-primary btn-form display-4">Enviar</button>
+          <button type="submit" class="btn btn-primary btn-form display-4" (click)="updateMenu(menuForm.value)"
+          [disabled]="!menuForm.valid || !menuForm.value.id">Editar</button>
+          <button class="btn btn-danger" (click)="postMenu(menuForm.value)"
+          [disabled]="!menuForm.valid || menuForm.value.id" >CRIAR MENU</button>
+          <button class="btn btn-primary" (click)="deleteMenu(menuForm.value)"
+          [disabled]="!menuForm.valid || !menuForm.value.id">DELETA MENU</button>
       </span>
   </form>
+
+  <table  class="row-border table table-bordered table-hover dataTable dtr-inline collapsed" aria-describedby="example2_info">
+    <thead>
+        <tr>
+          <th>ID</th>
+          <th>MENU</th>
+          <th>LINK</th>
+          <th>ADMIN</th>
+          <th>EXACT</th>
+        </tr>
+    </thead>
+            <tbody>
+              <tr *ngFor="let item of Menus" (click)="populaMenu(item)">
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.link}}</td>
+                <td>{{item.admin}}</td>
+                <td>{{item.exact}}</td>
+            </tr>
+        </tbody>
+  </table>
 </div>
 <br>
