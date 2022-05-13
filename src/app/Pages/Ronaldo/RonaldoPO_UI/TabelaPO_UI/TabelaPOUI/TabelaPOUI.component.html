@@ -1,10 +1,30 @@
 <div class="card">
+
+    <div class="inline">
+        <div>
+            
+            <po-input class="po-lg-3" p-icon="po-icon-user" p-required="false" p-label="Id Proposta" p-clean (p-change-model)="buscarPropostaID($event)">
+                 
+           </po-input>
+        
+            <po-input class="po-lg-3" p-icon="po-icon-user"  p-label="CPF Cliente:" p-clean (p-change-model)="buscarPropostaCPF($event)">
+                 </po-input>
+        </div>
+    </div>
+
     <po-table 
-    [p-items]="tabelaPropostaObj"
-    [p-columns]="columns"
-    [p-sort]="true"
-    [p-striped]="true"
-    
+        p-auto-router
+        p-keep-filters
+        [p-height]="500"
+        [p-items]="filter"
+        [p-columns]="columns"
+        [p-sort]="true"
+        [p-striped]="true"
+        [p-show-more-disabled]="false"
+        (p-show-more)="evento()"
     > 
     </po-table>
+
+
+
 </div>

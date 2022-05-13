@@ -1,10 +1,11 @@
 ::ng-deep{
-    .po-table-column-label
+    .po-table-column-label-ellipsis 
     {
-        width: 200px;
+        width: 90%;
+        height: 90%;
         text-align: center;
     }
-    .po-table .po-table-header {
+    .po-table .po-table-header-ellipsis  {
         font-family: Roboto-Bold,sans-serif;
         font-size: 12px;
         line-height: 24px;
@@ -13,10 +14,18 @@
         height: 44px;
         text-align: left;
     }
-    .po-table-header-column-manager-button {
+    .po-table-header-column-manager-button  {
         color: #000000;
         font-size: 16px;
         padding: 6px;
+    }
+    
+    .po-button{ 
+        color: #000000;
+        font-size: 16px;
+        padding: 6px;
+        border-color: blue;
+        
     }
 }
 
@@ -24,3 +33,7 @@
     max-width: 100%;
     margin: 0 auto;
    }
+
+.inline{
+    display: inline-block;
+}

@@ -16,14 +16,19 @@ export class TabelaPOUIComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject<any>();
 
   tabelaPropostaObj: Proposta[];
+  filter: Proposta[];
   columns: PoTableColumn[]
  
+
+  filtroPropostaId: string;
+  filtroProposCPF: string;
   constructor(private service: TabelaService) { }
 
   ngOnInit() {
     this.service.consultaProposta().subscribe({
       next: (proposta)=>{
         this.tabelaPropostaObj = proposta
+        this.filter = proposta;
         this.dtTrigger.next(null);
        
       },
@@ -59,5 +64,29 @@ export class TabelaPOUIComponent implements OnInit {
       }
     });
   }
+  
+  evento()
+  {}
+  buscarPropostaID(proposta: string)
+  {
+    this.filtroPropostaId = proposta;
+    if (proposta =="")
+      this.filter = this.tabelaPropostaObj;
 
-}
+    this.filter = this.tabelaPropostaObj.filter((e) => 
+    {
+      return e.id_proposta.match(this.filtroPropostaId);
+    })
+  }
+
+  buscarPropostaCPF(proposta: string)
+  {
+    this.buscarPropostaID(this.filtroPropostaId);
+
+    this.filter = this.filter.filter((e) => 
+    {
+      return e.cpf_cliente.match(proposta);
+    })
+  }
+
+} 
