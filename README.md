@@ -1,7 +1,7 @@
 # ModeloAngular
 
 Criado para estudos e consulta, 
-feito com observable para consulta VIA cep - populando um formulário e com manipulações de form group/validações
+Observable, Gerenciamento de estado, Listas, DataTable, PO UI, Validações(Validators)
 
 modularizado, com outros assuntos!
 
