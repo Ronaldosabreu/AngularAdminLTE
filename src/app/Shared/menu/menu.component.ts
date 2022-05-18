@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { interval } from 'rxjs';
+import { select, Store } from '@ngrx/store';
+import { interval, Observable } from 'rxjs';
 import { Menu } from './menu';
 import { MenusService } from './menu.service';
 
@@ -10,9 +11,9 @@ import { MenusService } from './menu.service';
 export class MenuComponent implements OnInit {
 
   menus: Menu[];
+  contador$:  Observable<number> = this.store.pipe(select('counterReducer'))
 
-
-  constructor(private menuService: MenusService) { }
+  constructor(private menuService: MenusService, private store: Store<{counterReducer:  number}>) { }
 
   ngOnInit(): void 
   {
@@ -21,7 +22,7 @@ export class MenuComponent implements OnInit {
     interval(1000).subscribe((x) => this.carregarMenu());
     
   }
-
+  
 
   carregarMenu() {
       this.menuService.obterMenus().subscribe({

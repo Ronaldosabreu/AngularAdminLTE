@@ -6,6 +6,7 @@ import { ObservableComponent } from './Pages/Estudos_DevIO/Observable/Observable
 import { PromiseComponent } from './Pages/Estudos_DevIO/Promise/Promise.component';
 import { HomeComponent } from './Shared/home/home.component';
 import { TabelaComponent } from './Pages/Ronaldo/tabela/tabela.component';
+import { GerenciamentoEstadoComponent } from './Pages/Ronaldo/gerenciamento-estado/gerenciamento-estado.component';
 
 export const routes: Routes = [
   {path:'',redirectTo:'/home', pathMatch:'full'},
@@ -15,6 +16,7 @@ export const routes: Routes = [
   {path:'contato',component: ContatoComponent},
   {path:'tabela',component: TabelaComponent},
   {path:'cadastro',component: CadastroComponent},
+  {path:'gerenciamento',component: GerenciamentoEstadoComponent},
   {
     path: 'produtos', 
     loadChildren: () => import('./Pages/Demos/Arquitetura/produto.module')

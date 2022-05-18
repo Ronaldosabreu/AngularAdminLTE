@@ -20,6 +20,10 @@ import { DataTablesModule } from 'angular-datatables';
 import { PipeTransformCPF } from './Utils/pipeTransform.pipe';
 import { PoModule } from '@po-ui/ng-components';
 import { ContatoComponent } from './Pages/Estudos_DevIO/contato/contato.component';
+import { GerenciamentoEstadoComponent } from './Pages/Ronaldo/gerenciamento-estado/gerenciamento-estado.component';
+import { StoreModule } from '@ngrx/store';
+
+import {reducer as counterReducer} from './Pages/Ronaldo/gerenciamento-estado/ngrxcontador'
 
 registerLocaleData(ptBr);
 // **************************************************
@@ -30,7 +34,8 @@ registerLocaleData(ptBr);
       CadastroComponent,
       TabelaComponent,
       PipeTransformCPF,
-      ContatoComponent
+      ContatoComponent,
+      GerenciamentoEstadoComponent
        ],
   imports: [
     CommonModule,
@@ -44,7 +49,10 @@ registerLocaleData(ptBr);
     NavegacaoModule,
     HttpClientModule,
     DataTablesModule,
-    PoModule
+    PoModule,
+    StoreModule.forRoot({
+      counterReducer
+    })
   ],
   providers: [
      // ************************************
