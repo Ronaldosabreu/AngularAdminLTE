@@ -1,8 +1,9 @@
 <p>
   <h1>Gerenciamento de estado</h1>
-  Contador: {{(contador$ | async)}}
+  Contador: {{(contador$ | async).counter}}
 
   <p>
   <button class="btn btn-primary" (click)="incrementar()">+</button>
   <button class="btn btn-warning" (click)="decrementar()">-</button>
+  <button class="btn btn-warning" (click)="incrementarParam()"> + 3</button>
 </p>

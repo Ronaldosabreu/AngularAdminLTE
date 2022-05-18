@@ -12,22 +12,28 @@ import { MenusService } from './menu.service';
 export class MenuComponent implements OnInit {
 
   menus: Menu[];
-  contador$:  Observable<number> = this.store.pipe(select('counterReducer'))
+  contador$:  Observable<any> = this.store.pipe(select('counterReducer'))
 
-  constructor(private menuService: MenusService, private store: Store<{counterReducer:  number}>) { }
+  constructor(private menuService: MenusService,
+      private store: Store<{counterReducer:  number}>
+     )
+      { }
 
   ngOnInit(): void 
   {
     this.carregarMenu();
 
-    interval(1000).subscribe((x) => this.carregarMenu());
+    // interval(1000).subscribe((x) => this.carregarMenu());
     
   }
   
   estiloCaixa()
   {
     let count: number = 0;
-    this.contador$.subscribe((e)=>{count = e})
+    this.contador$.subscribe((e)=>{
+      count = e.counter
+      console.log(e)
+    })
     if (count <= 0)return 'qtd'
     else return 'qtd-'
 
