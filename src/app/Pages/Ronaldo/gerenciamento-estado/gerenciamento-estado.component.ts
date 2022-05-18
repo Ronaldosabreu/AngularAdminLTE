@@ -29,7 +29,6 @@ export class GerenciamentoEstadoComponent implements OnInit {
 
   public decrementar(): void { // Altera nosso Estado removendo um número
     this.store.dispatch(new Decrement())
-  
-  }
+    }
 
 }

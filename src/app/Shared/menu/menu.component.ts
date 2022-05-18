@@ -6,7 +6,8 @@ import { MenusService } from './menu.service';
 
 @Component({
   selector: 'app-menu',
-  templateUrl: './menu.component.html'
+  templateUrl: './menu.component.html',
+  styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
 
@@ -23,6 +24,14 @@ export class MenuComponent implements OnInit {
     
   }
   
+  estiloCaixa()
+  {
+    let count: number = 0;
+    this.contador$.subscribe((e)=>{count = e})
+    if (count <= 0)return 'qtd'
+    else return 'qtd-'
+
+  }
 
   carregarMenu() {
       this.menuService.obterMenus().subscribe({

@@ -8,9 +8,8 @@ export class Increment implements Action{
     readonly type ='Increment'
 }
 const counter: number = 0;
-const INITIAL_STATE = counter
 
-export const reducer = (state = INITIAL_STATE, action: Action) => 
+export const reducer = (state = counter, action: Action) => 
 {
     switch (action.type)
     {
