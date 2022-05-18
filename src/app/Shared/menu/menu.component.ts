@@ -14,11 +14,11 @@ export class MenuComponent implements OnInit {
 
   
   objetoEstado$:  Observable<any> = this.store.pipe(select('counterReducer'))
-  menu$:  Observable<Menu[]> = this.storeMenu.pipe(select('reducerMenu'))
+  menu$:  Observable<Menu[]> = this.storeMenu.pipe(select('reducerEditMenu'))
 
   constructor(private menuService: MenusService,
       private store: Store<{counterReducer:  any}>,
-      private storeMenu: Store<{reducerMenu:  Menu[]}>
+      private storeMenu: Store<{reducerEditMenu:  Menu[]}>
      )
       { }
 

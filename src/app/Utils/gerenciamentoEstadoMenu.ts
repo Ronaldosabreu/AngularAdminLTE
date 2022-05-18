@@ -1,28 +1,54 @@
-import { createAction, props, createReducer, on } from "@ngrx/store";
+import { createAction, props } from "@ngrx/store";
 import { Menu } from "../Shared/menu/menu"
 
 enum ActionTypes{
-    EditarMenu='Editar',
+    CarregaMenu='CarregaMenu',
+    EditarMenu='EditarMenu',
 }
 
-export const Editar = createAction(
-    ActionTypes.EditarMenu
-)
-export const EditarParam = createAction(
-    ActionTypes.EditarMenu,
+export const EditarParam = createAction
+(
+    ActionTypes.CarregaMenu,
     props<{menu: Menu[]}>(),
 )
 
+export const EditarMenu = createAction
+(
+    ActionTypes.EditarMenu,
+    props<{menu: Menu}>(),
+)
 
-   let menu: Menu[];
+var menu: Menu[] = [];
 
-export const reducerMenu = (state = menu, action: any) => 
+export const reducerEditMenu = (state = menu, action: any) => 
 {
     switch (action.type)
     {
-        case ActionTypes.EditarMenu: {return state = action.menu }
+        case ActionTypes.CarregaMenu: {return state = action.menu }
+        case ActionTypes.EditarMenu: 
+        {
+            let index = state.findIndex(item => item.id == action.menu.id);
+            let array = [...state];
+            array[index] = action.menu;
+            return state = array
+
+        }
         default:
         return state
 
     }
 }
+
+// export const reducerEditMenu = (state = menu, action: any) => 
+// {
+//     switch (action.type)
+//     {
+//         case ActionTypes.EditarMenu: 
+//         {
+
+//             return state = action.menu 
+//         }
+//         default:
+//         return state
+//     }
+// }

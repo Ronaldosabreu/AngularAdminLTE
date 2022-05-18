@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder,  FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { Menu } from 'src/app/Shared/menu/menu';
 import { MenusService } from 'src/app/Shared/menu/menu.service';
-import { EditarParam } from 'src/app/Utils/gerenciamentoEstadoMenu';
+import { EditarMenu } from 'src/app/Utils/gerenciamentoEstadoMenu';
 
 @Component({
   selector: 'app-contato',
@@ -12,6 +13,7 @@ import { EditarParam } from 'src/app/Utils/gerenciamentoEstadoMenu';
 })
 export class ContatoComponent implements OnInit 
 {
+  menu$:  Observable<Menu[]> = this.storeMenu.pipe(select('reducerEditMenu'))
   menu: Menu;
   Menus: Menu[];
 
@@ -21,9 +23,10 @@ export class ContatoComponent implements OnInit
   menuClicadoExcluir: Menu;
 
   constructor(
-      private menuService: MenusService, 
-      private fb: FormBuilder,
-      private storeMenu: Store<{reducerMenu:  Menu[]}>)
+              private menuService: MenusService, 
+              private fb: FormBuilder,
+              private storeMenu: Store<{reducerEditMenu:  any}>
+             )
     { }
   ngOnInit() 
   {
@@ -42,7 +45,7 @@ export class ContatoComponent implements OnInit
       next: (data) =>
        {
          this.Menus = data;
-         this.storeMenu.dispatch(EditarParam({menu: data}))
+         
       },
       error: (e) => {},
       complete: () => { },
@@ -66,8 +69,16 @@ export class ContatoComponent implements OnInit
     this.menuService.update(menu).subscribe({
       next: () => { },
       error: (e) => {},
-      complete: () => {  this.carregarMenu();},
+      complete: () => 
+      { 
+      
+      },
+      
     });
+    this.storeMenu.dispatch(EditarMenu({menu: menu})); 
+
+    
+    
 }
 
 
