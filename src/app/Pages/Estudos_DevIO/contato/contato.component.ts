@@ -3,6 +3,7 @@ import { FormBuilder,  FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Menu } from 'src/app/Shared/menu/menu';
 import { MenusService } from 'src/app/Shared/menu/menu.service';
+import { EditarParam } from 'src/app/Utils/gerenciamentoEstadoMenu';
 
 @Component({
   selector: 'app-contato',
@@ -41,8 +42,7 @@ export class ContatoComponent implements OnInit
       next: (data) =>
        {
          this.Menus = data;
-
-        // this.storeMenu.dispatch(EditarParam({menu: data})) ////arrumar
+         this.storeMenu.dispatch(EditarParam({menu: data}))
       },
       error: (e) => {},
       complete: () => { },

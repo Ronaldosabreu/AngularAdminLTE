@@ -12,9 +12,8 @@ import { MenusService } from './menu.service';
 })
 export class MenuComponent implements OnInit {
 
-  menus: Menu[];
+  
   objetoEstado$:  Observable<any> = this.store.pipe(select('counterReducer'))
-
   menu$:  Observable<Menu[]> = this.storeMenu.pipe(select('reducerMenu'))
 
   constructor(private menuService: MenusService,
@@ -45,7 +44,6 @@ export class MenuComponent implements OnInit {
   carregarMenu() {
       this.menuService.obterMenus().subscribe({
         next: (data) => {
-          this.menus = data;
           
           this.storeMenu.dispatch(EditarParam({menu: data}))
 
