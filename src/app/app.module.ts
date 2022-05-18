@@ -24,6 +24,7 @@ import { GerenciamentoEstadoComponent } from './Pages/Ronaldo/gerenciamento-esta
 import { StoreModule } from '@ngrx/store';
 
 import {reducer as counterReducer} from './Pages/Ronaldo/gerenciamento-estado/ngrxcontador'
+import { reducerMenu } from './Utils/gerenciamentoEstadoMenu';
 
 registerLocaleData(ptBr);
 // **************************************************
@@ -51,7 +52,8 @@ registerLocaleData(ptBr);
     DataTablesModule,
     PoModule,
     StoreModule.forRoot({
-      counterReducer
+      counterReducer,
+      reducerMenu
     })
   ],
   providers: [

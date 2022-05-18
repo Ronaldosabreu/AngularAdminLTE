@@ -1,9 +1,22 @@
 <p>
   <h1>Gerenciamento de estado</h1>
-  Contador: {{(contador$ | async).counter}}
+  Contador: {{(objetoEstado$ | async).counter}}
 
   <p>
-  <button class="btn btn-primary" (click)="incrementar()">+</button>
-  <button class="btn btn-warning" (click)="decrementar()">-</button>
-  <button class="btn btn-warning" (click)="incrementarParam()"> + 3</button>
-</p>
+    <button class="btn btn-primary" (click)="incrementar()">+</button>
+    <button class="btn btn-warning" (click)="decrementar()">-</button>
+    <button class="btn btn-warning" (click)="incrementarParam()"> + 3</button>
+  </p>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon1">@</span>
+    </div>
+    <input type="text"  #nome class="form-control" placeholder="Username" 
+    aria-label="Username" aria-describedby="basic-addon1"
+    (keyup)=incrementarParam()>
+  </div>
+  
+  Nome: {{(objetoEstado$ | async).nome}}
+
+

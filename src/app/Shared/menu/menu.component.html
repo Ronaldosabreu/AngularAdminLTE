@@ -167,13 +167,24 @@
     />
       <span class="brand-text font-weight-light">Modelo -
          QTD: </span>
-         <span [ngClass]="estiloCaixa()"> {{ (contador$ | async).counter }} </span>
+         <span [ngClass]="estiloCaixa()"> {{ (objetoEstado$ | async).counter }} </span>
+         
     </a>
-
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
-
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img
+            src="assets/user2-160x160.jpg"
+            class="img-circle elevation-2"
+            alt="User Image"
+          />
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">{{(objetoEstado$ | async).nome}}</a>
+        </div>
+      </div>
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -184,7 +195,7 @@
           data-accordion="false"
         >
 
-        <li class="nav-item" *ngFor="let item of menus">
+        <li class="nav-item" *ngFor="let item of (menu$ | async)">
           <a class="nav-link"
           [routerLink]="[item.link]" 
           routerLinkActive="active" 

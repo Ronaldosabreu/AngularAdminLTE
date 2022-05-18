@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { interval, Observable } from 'rxjs';
+import { EditarParam } from 'src/app/Utils/gerenciamentoEstadoMenu';
 import { Menu } from './menu';
 import { MenusService } from './menu.service';
 
@@ -12,10 +13,13 @@ import { MenusService } from './menu.service';
 export class MenuComponent implements OnInit {
 
   menus: Menu[];
-  contador$:  Observable<any> = this.store.pipe(select('counterReducer'))
+  objetoEstado$:  Observable<any> = this.store.pipe(select('counterReducer'))
+
+  menu$:  Observable<Menu[]> = this.storeMenu.pipe(select('reducerMenu'))
 
   constructor(private menuService: MenusService,
-      private store: Store<{counterReducer:  number}>
+      private store: Store<{counterReducer:  any}>,
+      private storeMenu: Store<{reducerMenu:  Menu[]}>
      )
       { }
 
@@ -30,9 +34,8 @@ export class MenuComponent implements OnInit {
   estiloCaixa()
   {
     let count: number = 0;
-    this.contador$.subscribe((e)=>{
+    this.objetoEstado$.subscribe((e)=>{
       count = e.counter
-      console.log(e)
     })
     if (count <= 0)return 'qtd'
     else return 'qtd-'
@@ -43,7 +46,9 @@ export class MenuComponent implements OnInit {
       this.menuService.obterMenus().subscribe({
         next: (data) => {
           this.menus = data;
-          //console.log(data);
+          
+          this.storeMenu.dispatch(EditarParam({menu: data}))
+
         },
         error: (e) => {
           //console.log(e);

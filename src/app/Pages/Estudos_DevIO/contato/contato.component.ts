@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder,  FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { Menu } from 'src/app/Shared/menu/menu';
 import { MenusService } from 'src/app/Shared/menu/menu.service';
 
@@ -18,7 +19,11 @@ export class ContatoComponent implements OnInit
   menuIdClicado: string;
   menuClicadoExcluir: Menu;
 
-  constructor(private menuService: MenusService, private fb: FormBuilder) { }
+  constructor(
+      private menuService: MenusService, 
+      private fb: FormBuilder,
+      private storeMenu: Store<{reducerMenu:  Menu[]}>)
+    { }
   ngOnInit() 
   {
     this.carregarMenu();
@@ -33,7 +38,12 @@ export class ContatoComponent implements OnInit
   carregarMenu() 
   {
     this.menuService.obterMenus().subscribe({
-      next: (data) => { this.Menus = data;},
+      next: (data) =>
+       {
+         this.Menus = data;
+
+        // this.storeMenu.dispatch(EditarParam({menu: data})) ////arrumar
+      },
       error: (e) => {},
       complete: () => { },
     });

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Decrement, Increment, IncrementParam } from './ngrxcontador';
+import { Decrement, Increment, IncrementParam, IncrementParamUser } from './ngrxcontador';
 
 @Component({
   selector: 'app-gerenciamento-estado',
@@ -10,21 +10,24 @@ import { Decrement, Increment, IncrementParam } from './ngrxcontador';
 })
 export class GerenciamentoEstadoComponent implements OnInit {
 
-  public contador$: Observable<any>;
+  public objetoEstado$: Observable<any>;
 
-  constructor(private store: Store<{counterReducer:  number}>) 
-  { 
-  
-  }
 
-  ngOnInit() {
-    this.contador$ = this.store.select('counterReducer')
-      
+  @ViewChild("nome") nome: ElementRef;
+
+  constructor(private store: Store<{counterReducer:  any}>) 
+  { }
+
+  ngOnInit() 
+  {
+    this.objetoEstado$ = this.store.select('counterReducer')
   }
 
   public incrementarParam(): void { // Altera nosso Estado aumentando um número
-    this.store.dispatch(IncrementParam({payload: 3}))
-   
+    this.store.dispatch(IncrementParam({payloadNum: 3}))
+
+    let nome = this.nome.nativeElement.value;
+    this.store.dispatch(IncrementParamUser({payloadNum: nome}))
   }
 
   public incrementar(): void { // Altera nosso Estado aumentando um número

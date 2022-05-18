@@ -1,4 +1,3 @@
-import { state } from "@angular/animations";
 import { Action, createAction, props, createReducer, on } from "@ngrx/store";
 
 
@@ -6,6 +5,7 @@ enum ActionTypes{
     Decrement='Decrement',
     Increment='Increment',
     IncrementParam='IncrementParam',
+    IncrementParamUser='IncrementParamUser',
 }
 
 export const Decrement = createAction(
@@ -14,7 +14,12 @@ export const Decrement = createAction(
 
 export const IncrementParam = createAction(
     ActionTypes.IncrementParam,
-    props<{payload: any}>()
+    props<{payloadNum: any}>(),
+)
+
+export const IncrementParamUser = createAction(
+    ActionTypes.IncrementParamUser,
+    props<{payloadNum: any}>(),
 )
 
 export const Increment = createAction(
@@ -22,7 +27,8 @@ export const Increment = createAction(
 )
 
 const INITIAL_STATE = {
-     counter: 0
+     counter: 0,
+     nome: 'Seu Usuário'
 }
 
 // export const reducer = (state = counter, action: any) => 
@@ -41,13 +47,19 @@ const INITIAL_STATE = {
 
 export const reducer = createReducer(
     INITIAL_STATE,
-    on(IncrementParam, (state, {payload}) => ({
-        ...state, counter: state.counter + payload
+    on(IncrementParam, (state, {payloadNum}) => 
+    ({
+        ...state, counter: state.counter + payloadNum,
+        // nome: payloadUser,
+    })),
+    on(IncrementParamUser, (state, {payloadNum}) => 
+    ({
+        ...state,nome: payloadNum
     })),
     on(Decrement, state => ({
-        ...state, counter: state.counter-1
+        ...state, counter: state.counter - 1
     })),
     on(Increment, state => ({
-        ...state, counter: state.counter+1
+        ...state, counter: state.counter + 1
     }))
 )
