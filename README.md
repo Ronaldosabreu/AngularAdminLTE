@@ -6,3 +6,10 @@ feito com observable para consulta VIA cep - populando um formulário e com mani
 modularizado, com outros assuntos!
 
 ![image](https://user-images.githubusercontent.com/55091307/168938679-f6aa701a-caed-4ac8-9fad-305ed28117ac.png)
+
+![image](https://user-images.githubusercontent.com/55091307/168938855-2143d25c-c8ed-4866-bf55-1bede6dfce5f.png)
+
+![image](https://user-images.githubusercontent.com/55091307/168938956-233e8983-647f-4a16-bbe0-c89890963901.png)
+
+![image](https://user-images.githubusercontent.com/55091307/168939339-b1a7a758-7cd8-4700-96b4-24344442f6ef.png)
+
