@@ -28,6 +28,11 @@ export const routes: Routes = [
     .then(m=>m.CepModuleModule)
   },
   {
+    path: 'calendario', 
+    loadChildren: () => import('./Pages/Ronaldo/calendario/components/calendario.module')
+    .then(m=>m.CalendarioModule)
+  },
+  {
     path: 'tabelapo_ui', 
     loadChildren: () => import('./Pages/Ronaldo/RonaldoPO_UI/TabelaPO_UI/TabelaPO_UI.module')
     .then(m=>m.TabelaPO_UIModule)

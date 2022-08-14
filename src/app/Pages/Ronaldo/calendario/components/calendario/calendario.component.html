@@ -1,0 +1,21 @@
+<p (click)="MesSelecionado(0)">janeiro</p>
+<p (click)="MesSelecionado(1)">fev</p>
+<table class="calendario-dias">
+    <tr *ngFor="let dia of [0,1,2,3,4,5,6]">
+        <th>{{getDayOfWeek(dia)}}</th>
+    </tr>
+    <tr *ngFor="let dia of calendario" 
+    (click)="selecionaDia(dia)"
+    [ngClass]="dia.selecionado ? 'azul' : 'cinza'">
+        <td>
+            <div [ngClass]="dia.mes_atual ? 'mesAtual' : 'mesPassado'" >
+                <div *ngIf="dia.mes_atual">
+                    RS: 200.00
+                </div>
+                <div class="divDia">
+                    {{dia.dia_mes}}
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>

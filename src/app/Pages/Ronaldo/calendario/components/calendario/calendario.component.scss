@@ -1,0 +1,65 @@
+.calendario-dias {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    height: 650px;
+    width: 80%;
+    margin: auto;
+}
+
+.calendario-dias > tr {
+    border: 1px solid #ccc;
+    font-size: 24px;
+    
+}
+.calendario-dias > tr > td {
+    display: block;
+    
+}
+
+.azul{
+    background-color: blue;
+    place-items: start / end;
+}
+.cinza{
+    background-color: white;
+    font-size: 20px;
+    
+}
+
+.mesAtual
+{
+    color: black;
+    text-align: right;
+    position: relative;
+    padding: 5px;
+    width: 100%;
+    position: relative;
+}
+.mesPassado
+{
+    color: silver;
+    text-align: right;
+    position: relative;
+    padding: 5px;
+    width: 100%;
+    position: relative;
+    
+}
+.margemValor{
+    display: block;
+    padding-right: 15px;
+}
+.margemDia{
+    display: block;
+    
+}
+.divDia
+{
+    line-height: 100px;
+    height: 100px;
+    text-align: center;
+    position: relative;
+}
+ 
+ 
