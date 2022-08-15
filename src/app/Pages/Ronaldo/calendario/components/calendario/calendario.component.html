@@ -1,21 +1,34 @@
-<p (click)="MesSelecionado(0)">janeiro</p>
-<p (click)="MesSelecionado(1)">fev</p>
-<table class="calendario-dias">
-    <tr *ngFor="let dia of [0,1,2,3,4,5,6]">
+<div class="flexCOntainer">
+    <p (click)="MesSelecionado(0)">jan</p>
+    <p (click)="MesSelecionado(1)">fev</p>
+    <p (click)="MesSelecionado(2)">mar</p>
+    <p (click)="MesSelecionado(3)">abr</p>
+    <p (click)="MesSelecionado(4)">mai</p>
+    <p (click)="MesSelecionado(5)">jun</p>
+    <p (click)="MesSelecionado(6)">jul</p>
+    <p (click)="MesSelecionado(7)">ago</p>
+</div>
+
+<div class="calendario-dias">
+    <div *ngFor="let dia of [0,1,2,3,4,5,6]">
         <th>{{getDayOfWeek(dia)}}</th>
-    </tr>
-    <tr *ngFor="let dia of calendario" 
-    (click)="selecionaDia(dia)"
-    [ngClass]="dia.selecionado ? 'azul' : 'cinza'">
-        <td>
-            <div [ngClass]="dia.mes_atual ? 'mesAtual' : 'mesPassado'" >
-                <div *ngIf="dia.mes_atual">
-                    RS: 200.00
-                </div>
-                <div class="divDia">
+    </div>
+</div>    
+        <div class="calendario-dias">
+          
+            <div *ngFor="let dia of calendario">
+                <p class="divValor" 
+                [class.calendario-dia-nao-faz-parte-mes-atual]="dataAtual.getMonth() !== dia.mes">
+                    &nbsp; 200,00
+                </p>
+                <p class="divMes" 
+                [class.calendario-dia-nao-faz-parte-mes-atual]="dataAtual.getMonth() !== dia.mes">
                     {{dia.dia_mes}}
-                </div>
+                </p>
+                
             </div>
-        </td>
-    </tr>
-</table>
+        </div>
+           
+
+
+

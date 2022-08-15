@@ -1,65 +1,50 @@
+.calendario-titulo {
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr;
+    text-align: center;
+    
+}
+
+.calendario-titulo-mes-ano {
+    font-size: 24px;
+}
+
 .calendario-dias {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     text-align: center;
-    height: 650px;
-    width: 80%;
-    margin: auto;
 }
 
-.calendario-dias > tr {
+.calendario-dias div {
     border: 1px solid #ccc;
     font-size: 24px;
-    
-}
-.calendario-dias > tr > td {
-    display: block;
-    
+    padding: 10px;
+    padding-right: 0px;
+    padding-top: 0px;
 }
 
-.azul{
-    background-color: blue;
-    place-items: start / end;
-}
-.cinza{
-    background-color: white;
+.divValor
+{
+    padding-right: 0px;
+    // border: 1px solid #ccc;
+    text-align: right;
+    position: abs($number: 0);
+    padding-top: 0px;
     font-size: 20px;
-    
+}
+.divMes{
+    padding-top: 0px;
+    margin-top: -15px;
+    margin-bottom: -0px;
+    position: relative;
+    top: 30px;
+    transform: translateY(-50%); 
+    height: 60px;
+}
+.calendario-dia-nao-faz-parte-mes-atual {
+    color: #aaa;
+}
+.flexCOntainer{
+    display: flex;
 }
 
-.mesAtual
-{
-    color: black;
-    text-align: right;
-    position: relative;
-    padding: 5px;
-    width: 100%;
-    position: relative;
-}
-.mesPassado
-{
-    color: silver;
-    text-align: right;
-    position: relative;
-    padding: 5px;
-    width: 100%;
-    position: relative;
-    
-}
-.margemValor{
-    display: block;
-    padding-right: 15px;
-}
-.margemDia{
-    display: block;
-    
-}
-.divDia
-{
-    line-height: 100px;
-    height: 100px;
-    text-align: center;
-    position: relative;
-}
- 
- 
