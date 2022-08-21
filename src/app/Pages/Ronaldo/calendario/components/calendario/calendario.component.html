@@ -1,4 +1,18 @@
-<div class="flexCOntainer">
+
+<div class="flexCOntainer" >
+    <div (click)="voltaMes()">
+        voltar
+    </div>
+    <div *ngFor="let item of mesesBotao">
+        <button >
+            {{item.data}} {{item.ano}}
+        </button>
+    </div>
+    <div (click)="avancaMes()">
+        avançar
+    </div>
+</div>
+<!-- <div class="flexCOntainer">
     <p (click)="MesSelecionado(0)">jan</p>
     <p (click)="MesSelecionado(1)">fev</p>
     <p (click)="MesSelecionado(2)">mar</p>
@@ -7,7 +21,7 @@
     <p (click)="MesSelecionado(5)">jun</p>
     <p (click)="MesSelecionado(6)">jul</p>
     <p (click)="MesSelecionado(7)">ago</p>
-</div>
+</div> -->
 
 <div class="calendario-dias">
     <div *ngFor="let dia of [0,1,2,3,4,5,6]">

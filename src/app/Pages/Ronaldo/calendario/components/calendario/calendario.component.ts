@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DebugElement, OnInit } from '@angular/core';
 import { Calendario } from '../../../models/calendario';
 import { Dia_da_Semana } from '../../../models/dia_da_Semana';
+import { meses_enum } from '../../../models/meses_enum.mode.';
 
 @Component({
   selector: 'app-calendario',
@@ -9,40 +10,78 @@ import { Dia_da_Semana } from '../../../models/dia_da_Semana';
 })
 export class CalendarioComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+    this.montaMesBotao();
+  }
   
+  mes: any;
+
   dataAtual: Date = new Date();
   diasCalendario: Date[] = [];
   calendario: Calendario[] = [];
-  mes: number;
   dia_da_Semana = Dia_da_Semana;
-
-
   
+  mesesEnum = meses_enum;
+  
+  mesesBotao: any;
 
-  construirCalendario() 
+  mesesMock: any =[
+   {
+      mes: "Agosto",
+      ano: 2022
+    },{
+      mes: "Setembro",
+      ano: 2022
+    },{
+      mes: "Outubro",
+      ano: 2022
+    },{
+      mes: "Novembro",
+      ano: 2022
+    },{
+      mes: "Dezembro",
+      ano: 2022
+    },{
+      mes: "Janeiro",
+      ano: 2023
+    }
+  ];
+
+  montaMesBotao()
+  {
+    this.mesesBotao=[];
+    this.mesesBotao.push(
+      {
+         data: this.mesesEnum[Number(this.getMoth(this.mesesMock[0].mes))],
+         mes: Number(this.getMoth(this.mesesMock[0].mes)),
+         ano: this.mesesMock[0].ano
+      },
+      { 
+        data: this.mesesEnum[Number(this.getMoth(this.mesesMock[1].mes))],
+        mes: Number(this.getMoth(this.mesesMock[1].mes)),
+        ano: this.mesesMock[1].ano
+      }
+    );
+  }
+    
+
+  construirCalendario(mes: any, ano: any) 
   {
     this.calendario = [];
 
-        const ano = this.dataAtual.getFullYear();
-        
-
+        // const ano = this.dataAtual.getFullYear();
         const primeiroDiaDaSemana = 0; // domingo
         const ultimoDiaDaSemana = 6; // sábado
 
         // Vai subtraindo -1 até chegarmos no primeiro dia da semana
-        const dataInicial = new Date(ano, this.mes, 1);
+        const dataInicial = new Date(ano, mes, 1);
         while (dataInicial.getDay() !== primeiroDiaDaSemana) 
-        {
           dataInicial.setDate(dataInicial.getDate() - 1);
-        }
 
         // Vai somando +1 até chegarmos no último dia da semana
-        const dataFinal = new Date(ano, this.mes + 1, 0);
+        const dataFinal = new Date(ano, mes + 1, 0);
         while (dataFinal.getDay() !== ultimoDiaDaSemana) 
-        {
           dataFinal.setDate(dataFinal.getDate() + 1);
-        }
 
         this.diasCalendario = [];
         for ( let data = new Date(dataInicial.getTime()); data <= dataFinal; data.setDate(data.getDate() + 1)) 
@@ -50,14 +89,10 @@ export class CalendarioComponent implements OnInit {
           this.diasCalendario.push(new Date(data.getTime()));
 
           const dia: number = new Date(data.getTime()).getDate();
-          const mes: number = new Date(data.getTime()).getMonth();
           const ano: number = new Date(data.getTime()).getFullYear();
 
           let mes_atual=false;
          
-          if (mes == this.mes)
-            mes_atual = true;
-          
           this.calendario.push({
                             dia_mes: dia,
                             dia_semama: new Date(data.getTime()).getDay(),
@@ -66,7 +101,6 @@ export class CalendarioComponent implements OnInit {
                             mes: mes,
                             mes_atual: mes_atual
                           })
-          console.log("----"+mes_atual);
         }
         
   }
@@ -76,8 +110,6 @@ export class CalendarioComponent implements OnInit {
 
       if(dia.dia_semama == this.dia_da_Semana.Dom || dia.dia_semama == this.dia_da_Semana.Sab)
         return
-
-
         if (dia.mes == this.mes)
         {
           if (dia.selecionado==false)
@@ -85,13 +117,13 @@ export class CalendarioComponent implements OnInit {
           else
             dia.selecionado = false;
         }
-        console.log(dia)
   }
 
   ngOnInit(): void 
   {
     this.mes = this.dataAtual.getMonth();
-    this.construirCalendario();
+
+    this.construirCalendario(this.dataAtual.getMonth(), 2022);
   }
 
 
@@ -125,10 +157,120 @@ export class CalendarioComponent implements OnInit {
     }
 }
 
-  MesSelecionado(mes: any)
-  {
-    this.mes = mes;
-    console.log(mes+"--------------------------");
-    this.construirCalendario();
+getMoth(mes: string) 
+{
+  switch (mes) {
+      case "Janeiro":
+          return this.mesesEnum.Janeiro
+          break;
+      case "Feveiro":
+        return this.mesesEnum.Fevereiro
+        break;
+      case "Março":
+        return this.mesesEnum.Março
+        break;
+      case "Abril":
+        return this.mesesEnum.Abril
+        break;
+      case "Maio":
+        return this.mesesEnum.Maio
+        break;
+      case "Junho":
+        return this.mesesEnum.Junho
+        break;
+      case "Julho":
+        return this.mesesEnum.Julho
+        break;
+      case "Agosto":
+        return this.mesesEnum.Agosto
+        break;
+      case "Setembro":
+        return this.mesesEnum.Setembro
+        break;
+      case "Outubro":
+        return this.mesesEnum.Outubro
+        break;
+      case "Novembro":
+        return this.mesesEnum.Novembro
+        break;
+      case "Dezembro":
+        return this.mesesEnum.Dezembro
+        break;
+      default:
+          return '';
+          break;  
   }
+}
+
+avancaMes()
+{
+    
+    let mes = this.mesesBotao.pop();
+    debugger
+
+    this.construirCalendario(mes.mes, mes.ano);
+    
+    let buscames = this.mesesMock.findIndex((me: any) => me.mes == mes.data)
+    
+    debugger
+    if (buscames+1 == this.mesesMock.length)
+    {
+      this.mesesBotao=[];
+      this.mesesBotao.push(
+        {
+          data: this.mesesEnum[Number(this.getMoth(this.mesesMock[buscames].mes))],
+          mes: Number(this.getMoth(this.mesesMock[buscames].mes)),
+          ano: this.mesesMock[buscames].ano
+        }
+      );
+    }
+    else{
+
+      this.mesesBotao=[];
+      this.mesesBotao.push(
+        {
+          data: this.mesesEnum[Number(this.getMoth(this.mesesMock[buscames].mes))],
+          mes: Number(this.getMoth(this.mesesMock[buscames].mes)),
+          ano: this.mesesMock[buscames].ano
+        },
+        { 
+          data: this.mesesEnum[Number(this.getMoth(this.mesesMock[buscames+1].mes))],
+          mes: Number(this.getMoth(this.mesesMock[buscames+1].mes)),
+          ano: this.mesesMock[buscames+1].ano
+        }
+      );
+    }
+  }
+
+
+
+
+
+  voltaMes()
+  {
+      
+      let mes = this.mesesBotao.shift();
+      let buscames = this.mesesMock.findIndex((me: any) => me.mes == mes.data)
+      
+      debugger      
+      if (buscames!=0)
+        {
+          debugger      
+
+          this.construirCalendario(mes.mes, mes.ano);
+          this.mesesBotao=[];
+          this.mesesBotao.push(
+            {
+              data: this.mesesEnum[Number(this.getMoth(this.mesesMock[buscames-1].mes))],
+              mes: Number(this.getMoth(this.mesesMock[buscames-1].mes)),
+              ano: this.mesesMock[buscames-1].ano
+            },
+            { 
+              data: this.mesesEnum[Number(this.getMoth(this.mesesMock[buscames].mes))],
+              mes: Number(this.getMoth(this.mesesMock[buscames].mes)),
+              ano: this.mesesMock[buscames].ano
+            }
+          );
+        }
+    }
 }
